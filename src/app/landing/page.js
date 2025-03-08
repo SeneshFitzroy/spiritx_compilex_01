@@ -1,8 +1,24 @@
+// pages/index.js
 import Head from 'next/head';
-import styles from './Home.module.css';
+import styles from '../styles/Home.module.css';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
-  const username = "Alex"; // Example username; replace with dynamic data if available
+  const [username, setUsername] = useState('Guest'); // Default to "Guest"
+
+  
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
+
+
+  const handleLogout = () => {
+    localStorage.removeItem('username');
+    setUsername('Guest'); 
+  };
 
   return (
     <div className={styles.container}>
@@ -36,10 +52,12 @@ export default function Home() {
           <p className={styles.description}>
             Security redefined for the future.
           </p>
-          <button className={styles.ctaButton}>
-            <span>Launch</span>
-            <span className={styles.buttonArrow}>↗</span>
-          </button>
+          {username !== 'Guest' && (
+            <button onClick={handleLogout} className={styles.logoutButton}>
+              <span>Logout</span>
+            </button>
+          )}
+          
         </section>
 
         <section id="features" className={styles.features}>
