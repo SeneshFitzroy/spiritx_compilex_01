@@ -1,12 +1,11 @@
-// pages/index.js
+'use client'
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import styles from '../landing/Home.module.css';
 import { useState, useEffect } from 'react';
 
 export default function Home() {
   const [username, setUsername] = useState('Guest'); // Default to "Guest"
 
-  
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
     if (storedUsername) {
