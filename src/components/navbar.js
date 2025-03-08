@@ -20,7 +20,7 @@ export default function Navbar() {
 
     return (
         <main className="flex justify-center pt-5 tracking-tight">
-            <nav className="fixed rounded-full w-[50vw] m-auto bg-white/50 backdrop-blur-md border border-black/10">
+            <nav className="fixed rounded-full w-[90vw] lg:w-[50vw] m-auto bg-white/50 backdrop-blur-md border border-black/10">
                 <div className="max-w-5xl mx-auto px-4">
                     <div className="flex justify-between h-16">
                         <div className="flex items-center">

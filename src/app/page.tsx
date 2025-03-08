@@ -7,9 +7,9 @@ export default function Home() {
 
       <Navbar/>
 
-      <div className="py-12 md:py-40">
+      <div className="py-40">
         <div className="max-w-5xl mx-auto px-4 text-center">
-          <p className="text-4xl tracking-tight text-gray-900 mb-6">
+          <p className="text-2xl lg:text-4xl tracking-tight text-gray-900 mb-6">
             Your Gateway to a <span className="text-green-600 font-semibold">Safe Login System</span>
           </p>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
@@ -33,24 +33,24 @@ export default function Home() {
 
       <div className="py-12 bg-gray-50">
         <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-center text-gray-900 mb-12">Key Features</h2>
+          <h2 className="text-2xl font-semibold text-center text-gray-900 mb-12">Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg">
-              <h3 className="text-lg font-semibold mb-2">Secure Authentication</h3>
+              <h3 className="font-semibold mb-2">Secure Authentication</h3>
               <p className="text-gray-600">
-                Industry-standard encryption and password hashing for maximum security.
+                Standard encryption and password hashing for maximum security.
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg">
-              <h3 className="text-lg font-semibold mb-2">User Validation</h3>
+              <h3 className="font-semibold mb-2">User Validation</h3>
               <p className="text-gray-600">
                 Comprehensive validation ensures strong passwords and unique usernames.
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg">
-              <h3 className="text-lg font-semibold mb-2">User-Friendly</h3>
+              <h3 className="font-semibold mb-2">User-Friendly</h3>
               <p className="text-gray-600">
-                Clear feedback and intuitive design for a seamless experience.
+                Clear feedback and modern design for a seamless experience.
               </p>
             </div>
           </div>
@@ -59,9 +59,9 @@ export default function Home() {
 
       <div className="py-12">
         <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-center text-gray-900 mb-12">How It Works</h2>
+          <h2 className="text-2xl font-semibold text-center text-gray-900 mb-12">So, how this works?</h2>
           <div className="flex flex-col md:flex-row justify-between space-y-8 md:space-y-0 md:space-x-4">
-            <div className="border rounded-xl p-6 md:w-1/3">
+            <div className="border border-black/20 rounded-xl p-6 md:w-1/3">
               <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-100 text-indigo-600 mb-4">
                 <span className="font-semibold">1</span>
               </div>
@@ -70,7 +70,7 @@ export default function Home() {
                 Create your account with a unique username and strong password.
               </p>
             </div>
-            <div className="border rounded-xl p-6 md:w-1/3">
+            <div className="border border-black/20 rounded-xl p-6 md:w-1/3">
               <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-100 text-indigo-600 mb-4">
                 <span className="font-semibold">2</span>
               </div>
@@ -79,13 +79,13 @@ export default function Home() {
                 Access your account securely with your credentials.
               </p>
             </div>
-            <div className="border rounded-xl p-6 md:w-1/3">
+            <div className="border border-black/20 rounded-xl p-6 md:w-1/3">
               <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-100 text-indigo-600 mb-4">
                 <span className="font-semibold">3</span>
               </div>
               <h3 className="font-medium mb-2">Personalized Access</h3>
               <p className="text-gray-600">
-                Enjoy a personalized welcome and access to all platform features.
+                Enjoy a personalized welcome experience.
               </p>
             </div>
           </div>
