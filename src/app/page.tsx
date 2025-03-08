@@ -36,19 +36,19 @@ export default function Home() {
           <h2 className="text-2xl font-semibold text-center text-gray-900 mb-12">Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg">
-              <h3 className="font-semibold mb-2">Secure Authentication</h3>
+              <h3 className="font-semibold mb-2">Secure Authentication Implementation</h3>
               <p className="text-gray-600">
-                Standard encryption and password hashing for maximum security.
+                Industry-level encryption and password hashing for maximum security.
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg">
-              <h3 className="font-semibold mb-2">User Validation</h3>
+              <h3 className="font-semibold mb-2">User Input Validation</h3>
               <p className="text-gray-600">
                 Comprehensive validation ensures strong passwords and unique usernames.
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg">
-              <h3 className="font-semibold mb-2">User-Friendly</h3>
+              <h3 className="font-semibold mb-2">User-Friendly Design</h3>
               <p className="text-gray-600">
                 Clear feedback and modern design for a seamless experience.
               </p>
