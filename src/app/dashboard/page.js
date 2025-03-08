@@ -2,21 +2,31 @@
 import Head from 'next/head';
 import styles from '../dashboard/Home.module.css';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const [username, setUsername] = useState('Guest');
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
     if (storedUsername) {
       setUsername(storedUsername);
+      setLoading(false);
+    } else {
+      router.push('/signin');
     }
-  }, []);
+  }, [router]);
 
+  if (loading) {
+    return <div className={styles.container}>Loading...</div>;
+  }
 
   const handleLogout = () => {
     localStorage.removeItem('username');
     setUsername('Guest'); 
+    router.push('/signin');
   };
 
   return (
