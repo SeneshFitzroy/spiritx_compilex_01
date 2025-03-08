@@ -13,7 +13,7 @@ This repository contains an authentication system. The project leverages Next.js
 
 - [Next.js](https://nextjs.org/)
 - [MongoDB](https://www.mongodb.com/)
-- [TailwindCss] (https://www.tailwindcss.com)
+- [TailwindCSS](https://www.tailwindcss.com)
 
 ## Setup Instructions
 
@@ -28,8 +28,8 @@ git clone https://github.com/SeneshFitzroy/spiritx_compilex_01.git
 ### 2. Create the Environment File
 In the root directory, create a file named .env and add the following environment variables:
 ```bash
-# MONGODB_URI=mongodb+srv://admin:PPtKyLIFz3ijxzmu@cluster.vgf7t.mongodb.net/Signup
-# ENCRYPTION_KEY=9d6a48362ac31fd73e77be8ac4ee64d1
+MONGODB_URI=mongodb+srv://admin:PPtKyLIFz3ijxzmu@cluster.vgf7t.mongodb.net/Signup
+ENCRYPTION_KEY=9d6a48362ac31fd73e77be8ac4ee64d1
 ```
 
 ### 3. Install Dependencies
@@ -52,20 +52,19 @@ Your application should now be running at http://localhost:3000.
 
 ### 5. Testing the Authentication System
 
-## Sign In
-In homepage, you will see a Sign In button or you can go to http://localhost:3000/signin. For Sign In using testing credntials, use
+#### Sign In
+In homepage, you will see a Sign In button or you can go to http://localhost:3000/signin. For Sign In using test credentials, use
 ```bash
 Username: CompileX
-# and
-Passowrd: CompileX2025@
+Password: CompileX2025@
 ```
 
-You'll will be redirected to /dashboard page. You can also try with invalid crendtials to see relevant erros messages.
+You'll will be redirected to /dashboard page. You can also try with invalid credentials to see relevant erros messages.
 
-## Sign Up
+#### Sign Up
 In homepage, you will see a Sign Up button or you can go to http://localhost:3000/signup. For Sign Up, you can use any username and password and see all the validations there. Upon successfull signup, you will be redirect to sign in page, which is http://localhost:3000/signin
 
-## 2 Factor Authentication (Additional)
+#### 2 Factor Authentication (Additional)
 As an additional feature, we integrated 2 factor authentication system, you can go to http://localhost:3000/settings/two-factor and enable two factor authentication. 
 
 1. Switch on the 2 factor authentication.
