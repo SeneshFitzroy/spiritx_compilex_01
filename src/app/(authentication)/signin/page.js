@@ -148,12 +148,12 @@ export default function Login() {
 
     return (
         <div className="login-container">
-            <div className="login-card">
+            <div className="w-full max-w-md bg-white rounded-xl shadow-xl p-8">
                 <h1 className="login-title tracking-tight font-semibold">Login 👋</h1>
 
                 <form onSubmit={handleSubmit}>
                     {errors.general && (
-                        <div className="mb-4 p-2 bg-red-50 border border-red-200 text-red-600 text-sm rounded">
+                        <div className="mb-4 p-2 bg-red-50 border border-red-200 text-red-600 text-sm rounded-md">
                             {errors.general}
                         </div>
                     )}
@@ -165,7 +165,7 @@ export default function Login() {
                             name="username"
                             type="text"
                             placeholder='John Doe'
-                            className={`w-full h-[40px] ${errors.username ? 'border-red-500' : ''} rounded-md`}
+                            className={`w-full h-[40px] ${errors.username ? 'border-red-500' : ''} rounded-xl`}
                             value={formData.username}
                             onChange={handleChange}
                             onBlur={() => setTouched({ ...touched, username: true })}
@@ -176,13 +176,13 @@ export default function Login() {
                     </div>
 
                     <div className="form-group">
-                    <Label className="text-sm" htmlFor="password">Password</Label>
+                        <Label className="text-sm" htmlFor="password">Password</Label>
                         <Input
                             id="password"
                             name="password"
                             type="password"
                             placeholder='Password'
-                            className={`w-full h-[40px] ${errors.password ? 'border-red-500' : ''} rounded-md`}
+                            className={`w-full h-[40px] ${errors.password ? 'border-red-500' : ''} rounded-xl`}
                             value={formData.password}
                             onChange={handleChange}
                             onBlur={() => setTouched({ ...touched, password: true })}
@@ -192,14 +192,16 @@ export default function Login() {
                         )}
                     </div>
 
-                    <Button className="w-full" type="submit" disabled={isLoading} variant={"default"}>
+                    <Button className="w-full rounded-full" type="submit" disabled={isLoading} variant={"default"}>
                         {isLoading ? 'Signing in...' : 'Login'}
                     </Button>
 
-                    <div className="flex justify-center gap-1 text-sm pt-5 tracking-tight">
-                        <span>Don't have an account?</span>
-                        <Link className="text-black font-medium hover:underline" href="/signup">Sign up</Link>
-                    </div>
+                    <p className="text-center text-sm text-gray-500 mt-5">
+                        Already have an account?
+                        <Link href="/signup" className="text-gray-700 font-semibold ml-1 hover:underline">
+                            Sign up
+                        </Link>
+                    </p>
                 </form>
             </div>
         </div>
