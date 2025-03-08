@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import './login.css';
 
 export default function Login() {
     const router = useRouter();
@@ -139,13 +140,13 @@ export default function Login() {
     };
 
     if (checkingAuth) {
-        return <div className="flex items-center justify-center min-h-screen bg-white">Loading...</div>;
+        return <div className="loading-screen">Loading...</div>;
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-white">
-            <div className="w-full max-w-md p-8 border border-gray-300 rounded-lg shadow-md">
-                <h1 className="text-2xl font-bold text-center mb-6 text-black">Login</h1>
+        <div className="login-container">
+            <div className="login-card">
+                <h1 className="login-title">Login</h1>
 
                 <form onSubmit={handleSubmit}>
                     {errors.general && (
@@ -154,10 +155,8 @@ export default function Login() {
                         </div>
                     )}
 
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-                            Username
-                        </label>
+                    <div className="form-group">
+                        <label htmlFor="username">Username</label>
                         <input
                             id="username"
                             name="username"
@@ -172,10 +171,8 @@ export default function Login() {
                         )}
                     </div>
 
-                    <div className="mb-6">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                            Password
-                        </label>
+                    <div className="form-group">
+                    <label htmlFor="password">Password</label>
                         <input
                             id="password"
                             name="password"
@@ -190,21 +187,13 @@ export default function Login() {
                         )}
                     </div>
 
-                    <div className="mb-4">
-                        <button
-                            type="submit"
-                            disabled={isLoading}
-                            className="w-full bg-black text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                        >
-                            {isLoading ? 'Signing in...' : 'Login'}
-                        </button>
-                    </div>
+                    <button type="submit" disabled={isLoading} className="login-button">
+                        {isLoading ? 'Signing in...' : 'Login'}
+                    </button>
 
-                    <div className="text-center text-sm">
-                        <span className="text-gray-800">Don't have an account?</span>{' '}
-                        <Link href="/signup" className="text-gray-700 hover:underline">
-                            Sign up
-                        </Link>
+                    <div className="signup-link">
+                        <span>Don't have an account?</span>
+                        <Link href="/signup">Sign up</Link>
                     </div>
                 </form>
             </div>
