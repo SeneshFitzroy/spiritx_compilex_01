@@ -35,7 +35,7 @@ export async function POST(request) {
 
         return NextResponse.json({
             message: 'Login successful!',
-            redirect: '/landing',
+            redirect: '/dashboard',
             user: {
                 id: user._id,
                 username: user.username

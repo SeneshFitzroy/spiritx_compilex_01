@@ -116,7 +116,7 @@ export default function Login() {
                 if (data.redirect) {
                     router.push(data.redirect);
                 } else {
-                    router.push('/landing');
+                    router.push('/dashboard');
                 }
             } catch (error) {
                 setErrors(prev => ({
