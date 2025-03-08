@@ -4,27 +4,25 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
 
-      <div className="flex justify-center">
-        <nav className="fixed w-full z-40 top-0">
-          <div className="rounded-full w-[50vw] m-auto mt-4 bg-white/70 backdrop-blur-md shadow-sm px-6">
-            <div className="flex justify-between h-16">
-              <div className="flex items-center">
-                <Link href="/">
-                  <span className="text-xl font-semibold text-indigo-600">SecureConnect</span>
-                </Link>
-              </div>
-              <div className="flex items-center space-x-4">
-                <Link href="/login">
-                  <span className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900">Log In</span>
-                </Link>
-                <Link href="/signup">
-                  <span className="px-4 py-2 border border-transparent rounded-md text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">Sign Up</span>
-                </Link>
-              </div>
+      <nav className="rounded-full w-[50vw] m-auto">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="flex justify-between h-16">
+            <div className="flex items-center">
+              <Link href="/">
+                <span className="text-xl font-semibold text-indigo-600">SecureConnect</span>
+              </Link>
+            </div>
+            <div className="flex items-center space-x-4">
+              <Link href="/login">
+                <span className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900">Log In</span>
+              </Link>
+              <Link href="/signup">
+                <span className="px-4 py-2 border border-transparent rounded-md text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">Sign Up</span>
+              </Link>
             </div>
           </div>
-        </nav>
-      </div>
+        </div>
+      </nav>
 
       <div className="py-12 md:py-20">
         <div className="max-w-5xl mx-auto px-4 text-center">

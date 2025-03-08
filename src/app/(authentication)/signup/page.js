@@ -169,7 +169,7 @@ export default function Signup() {
 
                     <p className="text-center text-xs text-gray-500 mt-4">
                         Already have an account?
-                        <Link href="/login" className="text-gray-700 font-semibold ml-1 hover:underline">
+                        <Link href="/signin" className="text-gray-700 font-semibold ml-1 hover:underline">
                             Sign in
                         </Link>
                     </p>
