@@ -1,9 +1,7 @@
-'use client'
+"use client";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 
 export default function Signup() {
     const [form, setForm] = useState({ username: '', password: '', confirmPassword: '' });
@@ -13,7 +11,6 @@ export default function Signup() {
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [missingRequirements, setMissingRequirements] = useState([]);
     const [checkingAuth, setCheckingAuth] = useState(true);
-    const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -94,7 +91,6 @@ export default function Signup() {
         if (missingRequirements.length > 0 || Object.keys(errors).length > 0) return;
 
         try {
-            setIsLoading(true);
             const res = await fetch('/api/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -112,8 +108,6 @@ export default function Signup() {
             }
         } catch (error) {
             setAuthError('Signup failed. Please try again.');
-        } finally {
-            setIsLoading(false);
         }
     };
 
@@ -141,8 +135,7 @@ export default function Signup() {
                     {[0, 1, 2, 3, 4].map((index) => (
                         <div
                             key={index}
-                            className={`h-2 w-full mx-1 rounded-sm ${index < passwordStrength ? strengthColors[passwordStrength - 1] : 'bg-gray-200'
-                                }`}
+                            className={`h-2 w-full mx-1 rounded-sm ${index < passwordStrength ? strengthColors[passwordStrength - 1] : 'bg-gray-300'}`}
                         />
                     ))}
                 </div>
@@ -159,13 +152,13 @@ export default function Signup() {
         if (!showConfirmation) return null;
 
         return (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                <div className="bg-white p-6 rounded-lg shadow-lg text-center max-w-md mx-4">
-                    <h2 className="text-2xl font-bold text-green-600 mb-4">Registration Successful!</h2>
-                    <p>Your account has been created successfully.</p>
+            <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+                <div className="bg-[#FFFFFF] p-6 rounded-lg shadow-lg text-center max-w-md mx-4 border border-gray-200">
+                    <h2 className="text-2xl font-bold text-[#1A1A1A] mb-4">Registration Successful!</h2>
+                    <p className="text-[#1A1A1A]">Your account has been created successfully.</p>
                     <p className="mt-2 text-sm text-gray-600">Redirecting to sign in page...</p>
-                    <div className="mt-4 w-full bg-gray-200 rounded-full h-1">
-                        <div className="bg-green-600 h-1 rounded-full animate-[progress_2s_linear]"></div>
+                    <div className="mt-4 w-full bg-gray-300 rounded-full h-1">
+                        <div className="bg-[#1A1A1A] h-1 rounded-full animate-[progress_2s_linear]"></div>
                     </div>
                 </div>
             </div>
@@ -173,69 +166,82 @@ export default function Signup() {
     };
 
     if (checkingAuth) {
-        return <div className="min-h-screen flex items-center justify-center bg-[#212529] p-4">Loading...</div>;
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A]">
+                <div className="text-[#FFFFFF] text-xl font-medium">Loading...</div>
+            </div>
+        );
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-[#212529] p-4">
-            <div className="w-full max-w-md bg-white rounded-xl border border-gray-100 shadow-xl p-8">
-                <h1 className="text-center text-xl font-semibold tracking-tight mb-6 text-black">Create an account</h1>
+        <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A] p-4">
+            <div className="w-full max-w-md bg-[#FFFFFF] rounded-xl border border-gray-200 shadow-xl p-8">
+                <h1 className="text-center text-xl font-semibold tracking-tight mb-6 text-[#1A1A1A]">
+                    Create account 🔑
+                </h1>
 
                 <form onSubmit={handleSubmit} className="space-y-5">
                     <div>
-                        <label className="text-sm text-black block mb-1 ml-1">Username</label>
-                        <Input
+                        <label className="text-sm text-[#1A1A1A] block mb-1 ml-1">Username</label>
+                        <input
                             name="username"
                             value={form.username}
                             onChange={handleChange}
-                            className="w-full px-3 py-2 border text-black text-sm border-gray-200 rounded-xl focus:outline-none focus:border-gray-400 transition-colors"
+                            className="w-full px-3 py-2 bg-gray-50 border text-[#1A1A1A] text-sm border-gray-300 rounded-xl focus:outline-none focus:border-[#1A1A1A] transition-colors"
                             placeholder="Enter username"
                         />
-                        {errors.username && <p className="text-red-500 text-xs mt-1 ml-1">{errors.username}</p>}
+                        {errors.username && <p className="text-[#E53E3E] text-xs mt-1 ml-1">{errors.username}</p>}
                     </div>
 
                     <div>
-                        <label className="text-sm text-black block mb-1 ml-1">Password</label>
-                        <Input
+                        <label className="text-sm text-[#1A1A1A] block mb-1 ml-1">Password</label>
+                        <input
                             type="password"
                             name="password"
                             value={form.password}
                             onChange={handleChange}
-                            className="w-full px-3 py-2 border text-black text-sm border-gray-200 rounded-xl focus:outline-none focus:border-gray-400 transition-colors"
+                            className="w-full px-3 py-2 bg-gray-50 border text-[#1A1A1A] text-sm border-gray-300 rounded-xl focus:outline-none focus:border-[#1A1A1A] transition-colors"
                             placeholder="Enter password"
                         />
                         {renderPasswordStrength()}
                         {missingRequirements.length > 0 && (
-                            <p className="text-red-500 text-xs mt-1 ml-1">{formatMissingRequirements()}</p>
+                            <p className="text-[#E53E3E] text-xs mt-1 ml-1">{formatMissingRequirements()}</p>
                         )}
                     </div>
 
                     <div>
-                        <label className="text-sm text-black block mb-1 ml-1">Confirm Password</label>
-                        <Input
+                        <label className="text-sm text-[#1A1A1A] block mb-1 ml-1">Confirm Password</label>
+                        <input
                             type="password"
                             name="confirmPassword"
                             value={form.confirmPassword}
                             onChange={handleChange}
-                            className="w-full px-3 py-2 border text-black text-sm border-gray-200 rounded-xl focus:outline-none focus:border-gray-400 transition-colors"
+                            className="w-full px-3 py-2 bg-gray-50 border text-[#1A1A1A] text-sm border-gray-300 rounded-xl focus:outline-none focus:border-[#1A1A1A] transition-colors"
                             placeholder="Confirm password"
                         />
-                        {errors.confirmPassword && <p className="text-red-500 text-xs mt-1 ml-1">{errors.confirmPassword}</p>}
+                        {errors.confirmPassword && (
+                            <p className="text-[#E53E3E] text-xs mt-1 ml-1">{errors.confirmPassword}</p>
+                        )}
                     </div>
 
                     {authError && (
-                        <div className="py-2 px-3 border border-gray-200 rounded-xl">
-                            <p className="text-red-600 text-xs text-center">{authError}</p>
+                        <div className="py-2 px-3 bg-gray-50 border border-gray-300 rounded-xl">
+                            <p className="text-[#E53E3E] text-xs text-center">{authError}</p>
                         </div>
                     )}
 
-                    <Button className="w-full rounded-full py-5" type="submit" disabled={isLoading} variant={"default"}>
-                        {isLoading ? 'Creating an account...' : 'Sign Up'}
-                    </Button>
+                    <div className="pt-2">
+                        <button
+                            type="submit"
+                            className="w-full py-2 bg-[#1A1A1A] text-[#FFFFFF] text-sm tracking-tight font-semibold rounded-full hover:bg-[#333333] transition-colors"
+                        >
+                            Sign up
+                        </button>
+                    </div>
 
-                    <p className="text-center text-sm text-gray-500 mt-4">
+                    <p className="text-center text-xs text-gray-600 mt-4">
                         Already have an account?
-                        <Link href="/signin" className="text-gray-700 font-semibold ml-1 hover:underline">
+                        <Link href="/signin" className="text-[#1A1A1A] font-semibold ml-1 hover:text-[#333333] hover:underline transition-colors">
                             Sign in
                         </Link>
                     </p>

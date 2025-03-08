@@ -2,7 +2,9 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import './login.css';
 import { Input } from '@/components/ui/input';
+import { Label } from '@radix-ui/react-label';
 import { Button } from '@/components/ui/button';
 import TwoFactorDialog from '@/components/TwoFactorDialog';
 
@@ -145,62 +147,96 @@ export default function Login() {
     };
 
     if (checkingAuth) {
-        return <div className="min-h-screen flex items-center justify-center bg-[#212529] p-4">Loading...</div>;
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A]">
+                <div className="text-[#FFFFFF] text-2xl">Loading...</div>
+            </div>
+        );
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-[#212529] p-4">
-            <div className="w-full max-w-md bg-white rounded-xl border border-gray-100 shadow-xl p-8">
-                <h1 className="text-center text-xl font-semibold tracking-tight mb-6 text-black">Login 👋</h1>
+        <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A] p-4">
+            <div className="login-card relative w-full max-w-md bg-[#FFFFFF] rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+                <div className="relative p-8">
+                    <h1 className="login-title text-3xl font-bold text-[#1A1A1A] mb-8 text-center">
+                        Login 👋
+                    </h1>
 
-                <form onSubmit={handleSubmit} className="space-y-5">
-                    {errors.general && (
-                        <div className="py-2 px-3 border border-gray-200 rounded-xl">
-                            <p className="text-red-600 text-xs text-center">{errors.general}</p>
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        {errors.general && (
+                            <div className="p-3 bg-[#E53E3E]/10 border border-[#E53E3E]/30 text-[#E53E3E] text-sm rounded-lg">
+                                {errors.general}
+                            </div>
+                        )}
+
+                        <div className="form-group space-y-2">
+                            <Label className="text-sm text-[#1A1A1A] font-medium" htmlFor="username">
+                                Username
+                            </Label>
+                            <Input
+                                id="username"
+                                name="username"
+                                type="text"
+                                placeholder="John Doe"
+                                className={`w-full h-12 bg-gray-50 border ${errors.username ? 'border-[#E53E3E]' : 'border-gray-300'} text-[#1A1A1A] placeholder:text-gray-600 rounded-lg focus:ring-1 focus:ring-[#1A1A1A] focus:border-[#1A1A1A] transition-all duration-200`}
+                                value={formData.username}
+                                onChange={handleChange}
+                                onBlur={() => setTouched({ ...touched, username: true })}
+                            />
+                            {errors.username && (
+                                <p className="text-[#E53E3E] text-xs">{errors.username}</p>
+                            )}
                         </div>
-                    )}
 
-                    <div>
-                        <label className="text-sm text-black block mb-1 ml-1" htmlFor="username">Username</label>
-                        <Input
-                            id="username"
-                            name="username"
-                            type="text"
-                            placeholder="Enter username"
-                            className="w-full px-3 py-2 border text-black text-sm border-gray-200 rounded-xl focus:outline-none focus:border-gray-400 transition-colors"
-                            value={formData.username}
-                            onChange={handleChange}
-                            onBlur={() => setTouched({ ...touched, username: true })}
-                        />
-                        {errors.username && <p className="text-red-500 text-xs mt-1 ml-1">{errors.username}</p>}
-                    </div>
+                        <div className="form-group space-y-2">
+                            <Label className="text-sm text-[#1A1A1A] font-medium" htmlFor="password">
+                                Password
+                            </Label>
+                            <Input
+                                id="password"
+                                name="password"
+                                type="password"
+                                placeholder="••••••••"
+                                className={`w-full h-12 bg-gray-50 border ${errors.password ? 'border-[#E53E3E]' : 'border-gray-300'} text-[#1A1A1A] placeholder:text-gray-600 rounded-lg focus:ring-1 focus:ring-[#1A1A1A] focus:border-[#1A1A1A] transition-all duration-200`}
+                                value={formData.password}
+                                onChange={handleChange}
+                                onBlur={() => setTouched({ ...touched, password: true })}
+                            />
+                            {errors.password && (
+                                <p className="text-[#E53E3E] text-xs">{errors.password}</p>
+                            )}
+                        </div>
 
-                    <div>
-                        <label className="text-sm text-black block mb-1 ml-1" htmlFor="password">Password</label>
-                        <Input
-                            id="password"
-                            name="password"
-                            type="password"
-                            placeholder="Enter password"
-                            className="w-full px-3 py-2 border text-black text-sm border-gray-200 rounded-xl focus:outline-none focus:border-gray-400 transition-colors"
-                            value={formData.password}
-                            onChange={handleChange}
-                            onBlur={() => setTouched({ ...touched, password: true })}
-                        />
-                        {errors.password && <p className="text-red-500 text-xs mt-1 ml-1">{errors.password}</p>}
-                    </div>
+                        <Button
+                            className="w-full h-12 bg-[#1A1A1A] text-[#FFFFFF] font-semibold rounded-lg hover:bg-[#333333] disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-300"
+                            type="submit"
+                            disabled={isLoading}
+                            variant="default"
+                        >
+                            {isLoading ? (
+                                <span className="flex items-center justify-center gap-2">
+                                    <svg className="animate-spin h-5 w-5 text-[#FFFFFF]" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+                                    </svg>
+                                    Signing in...
+                                </span>
+                            ) : (
+                                'Login'
+                            )}
+                        </Button>
 
-                    <Button className="w-full rounded-full py-5" type="submit" disabled={isLoading} variant={"default"}>
-                        {isLoading ? 'Signing in...' : 'Login'}
-                    </Button>
-
-                    <p className="text-center text-sm text-gray-500 mt-4">
-                        Don&apos;t have an account?
-                        <Link href="/signup" className="text-gray-700 font-semibold ml-1 hover:underline">
-                            Sign up
-                        </Link>
-                    </p>
-                </form>
+                        <div className="flex justify-center gap-1 text-sm text-gray-600 tracking-tight">
+                            <span>Don't have an account?</span>
+                            <Link
+                                className="text-[#1A1A1A] font-medium hover:text-[#333333] hover:underline transition-colors duration-200"
+                                href="/signup"
+                            >
+                                Sign up
+                            </Link>
+                        </div>
+                    </form>
+                </div>
             </div>
 
             <TwoFactorDialog
