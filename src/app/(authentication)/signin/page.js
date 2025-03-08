@@ -23,6 +23,16 @@ export default function Login() {
     });
 
     const [isLoading, setIsLoading] = useState(false);
+    const [checkingAuth, setCheckingAuth] = useState(true);
+
+    useEffect(() => {
+        const storedUsername = localStorage.getItem('username');
+        if (storedUsername) {
+            router.push('/dashboard');
+        } else {
+            setCheckingAuth(false);
+        }
+    }, [router]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -45,7 +55,6 @@ export default function Login() {
         };
         let isValid = true;
 
-        // Username validation
         if (!formData.username) {
             tempErrors.username = 'Username is required';
             isValid = false;
@@ -128,6 +137,10 @@ export default function Login() {
             }
         }
     };
+
+    if (checkingAuth) {
+        return <div className="flex items-center justify-center min-h-screen bg-white">Loading...</div>;
+    }
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-white">

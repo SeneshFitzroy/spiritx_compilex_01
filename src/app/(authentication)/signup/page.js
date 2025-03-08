@@ -9,25 +9,33 @@ export default function Signup() {
     const [authError, setAuthError] = useState('');
     const [passwordStrength, setPasswordStrength] = useState(0);
     const [showConfirmation, setShowConfirmation] = useState(false);
-    // ADDED: Track missing password requirements
     const [missingRequirements, setMissingRequirements] = useState([]);
+    const [checkingAuth, setCheckingAuth] = useState(true);
     const router = useRouter();
+
+    useEffect(() => {
+        const storedUsername = localStorage.getItem('username');
+        if (storedUsername) {
+            router.push('/dashboard');
+        } else {
+            setCheckingAuth(false);
+        }
+    }, [router]);
 
     const validatePasswordStrength = (password) => {
         let strength = 0;
-        
+
         if (password.length >= 8) strength += 1;
         if (/[a-z]/.test(password)) strength += 1;
         if (/[A-Z]/.test(password)) strength += 1;
         if (/[0-9]/.test(password)) strength += 1;
         if (/[^A-Za-z0-9]/.test(password)) strength += 1;
-        
+
         return strength;
     };
 
     useEffect(() => {
         let newErrors = {};
-        // ADDED: Clear missing requirements array
         let newMissingRequirements = [];
 
         if (form.username && form.username.length < 8) {
@@ -35,7 +43,6 @@ export default function Signup() {
         }
 
         if (form.password) {
-            // CHANGED: Check each requirement individually and track what's missing
             if (!/[a-z]/.test(form.password)) {
                 newMissingRequirements.push('lowercase');
             }
@@ -45,13 +52,11 @@ export default function Signup() {
             if (!/[^A-Za-z0-9]/.test(form.password)) {
                 newMissingRequirements.push('special character');
             }
-            
-            // Only set error if there are missing requirements
+
             if (newMissingRequirements.length > 0) {
-                // We won't set a generic error message here, just track what's missing
-                newErrors.password = true; // Just set to true to indicate there is an error
+                newErrors.password = true;
             }
-            
+
             setMissingRequirements(newMissingRequirements);
             setPasswordStrength(validatePasswordStrength(form.password));
         } else {
@@ -83,7 +88,6 @@ export default function Signup() {
             return;
         }
 
-        // CHANGED: Check missing requirements before submitting
         if (missingRequirements.length > 0 || Object.keys(errors).length > 0) return;
 
         try {
@@ -107,35 +111,32 @@ export default function Signup() {
         }
     };
 
-    // ADDED: Function to format missing requirements message
     const formatMissingRequirements = () => {
         if (missingRequirements.length === 0) return '';
-        
+
         if (missingRequirements.length === 1) {
             return `Password must contain at least one ${missingRequirements[0]}.`;
         }
-        
+
         const lastRequirement = missingRequirements.pop();
         const message = `Password must contain at least one ${missingRequirements.join(', ')}, and one ${lastRequirement}.`;
-        // Put the last requirement back for future reference
         missingRequirements.push(lastRequirement);
-        
+
         return message;
     };
 
     const renderPasswordStrength = () => {
         const strengthLabels = ['Very Weak', 'Weak', 'Medium', 'Strong', 'Very Strong'];
         const strengthColors = ['bg-red-500', 'bg-orange-500', 'bg-yellow-500', 'bg-blue-500', 'bg-green-500'];
-        
+
         return (
             <div className="mt-2 mb-1">
                 <div className="flex mb-1">
                     {[0, 1, 2, 3, 4].map((index) => (
-                        <div 
+                        <div
                             key={index}
-                            className={`h-2 w-full mx-1 rounded-sm ${
-                                index < passwordStrength ? strengthColors[passwordStrength - 1] : 'bg-gray-200'
-                            }`}
+                            className={`h-2 w-full mx-1 rounded-sm ${index < passwordStrength ? strengthColors[passwordStrength - 1] : 'bg-gray-200'
+                                }`}
                         />
                     ))}
                 </div>
@@ -148,9 +149,9 @@ export default function Signup() {
         );
     };
 
-    const renderConfirmationDialog = () => {
+    const confirmationDialog = () => {
         if (!showConfirmation) return null;
-        
+
         return (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                 <div className="bg-white p-6 rounded-lg shadow-lg text-center max-w-md mx-4">
@@ -164,6 +165,10 @@ export default function Signup() {
             </div>
         );
     };
+
+    if (checkingAuth) {
+        return <div className="min-h-screen flex items-center justify-center bg-white p-4">Loading...</div>;
+    }
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-white p-4">
@@ -194,7 +199,6 @@ export default function Signup() {
                             placeholder="Enter password"
                         />
                         {renderPasswordStrength()}
-                        {/* CHANGED: Show only specific missing requirements */}
                         {missingRequirements.length > 0 && (
                             <p className="text-red-500 text-xs mt-1 ml-1">{formatMissingRequirements()}</p>
                         )}
@@ -236,8 +240,8 @@ export default function Signup() {
                     </p>
                 </form>
             </div>
-            
-            {renderConfirmationDialog()}
+
+            {confirmationDialog()}
         </div>
     );
 }
