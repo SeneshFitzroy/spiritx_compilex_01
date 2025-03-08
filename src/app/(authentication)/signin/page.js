@@ -26,11 +26,8 @@ export default function Login() {
         password: false
     });
 
-    // Mock user database - in a real app, this would be a backend call
-    const mockUsers = [
-        { username: 'user1', password: 'password123' },
-        { username: 'admin', password: 'admin123' }
-    ];
+    // Loading state for form submission
+    const [isLoading, setIsLoading] = useState(false);
 
     // Handle input changes
     const handleChange = (e) => {
@@ -92,7 +89,7 @@ export default function Login() {
     }, [formData, touched]);
 
     // Handle form submission
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Mark all fields as touched
@@ -102,22 +99,46 @@ export default function Login() {
         });
 
         if (validateForm()) {
-            // Check if user exists and password is correct
-            const user = mockUsers.find(u => u.username === formData.username);
+            setIsLoading(true);
+            try {
+                const response = await fetch('/api/signin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: formData.username,
+                        password: formData.password
+                    }),
+                });
 
-            if (!user) {
-                setErrors(prev => ({ ...prev, general: 'Username not found' }));
-                return;
+                const data = await response.json();
+
+                if (!response.ok) {
+                    // Handle API errors
+                    setErrors({
+                        username: data.errors?.username || '',
+                        password: data.errors?.password || '',
+                        general: data.errors?.general || 'Login failed. Please try again.'
+                    });
+                    return;
+                }
+
+                // Successful login
+                if (data.redirect) {
+                    router.push(data.redirect);
+                } else {
+                    router.push('/landing');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                setErrors(prev => ({
+                    ...prev,
+                    general: 'An error occurred during login. Please try again.'
+                }));
+            } finally {
+                setIsLoading(false);
             }
-
-            if (user.password !== formData.password) {
-                setErrors(prev => ({ ...prev, general: 'Invalid password' }));
-                return;
-            }
-
-            // Successful login
-            // In a real app, you would handle authentication tokens here
-            router.push('/dashboard');
         }
     };
 
@@ -176,9 +197,10 @@ export default function Login() {
                     <div className="mb-4">
                         <button
                             type="submit"
+                            disabled={isLoading}
                             className="w-full bg-black text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500"
                         >
-                            Login
+                            {isLoading ? 'Signing in...' : 'Login'}
                         </button>
                     </div>
 
