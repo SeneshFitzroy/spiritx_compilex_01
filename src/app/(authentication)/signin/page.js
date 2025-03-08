@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import TwoFactorDialog from '@/components/TwoFactorDialog';
 
 export default function Login() {
     const router = useRouter();
@@ -26,6 +27,8 @@ export default function Login() {
 
     const [isLoading, setIsLoading] = useState(false);
     const [checkingAuth, setCheckingAuth] = useState(true);
+    const [showTwoFactorDialog, setShowTwoFactorDialog] = useState(false);
+    const [twoFactorUsername, setTwoFactorUsername] = useState("");
 
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
@@ -122,13 +125,14 @@ export default function Login() {
                     return;
                 }
 
-                localStorage.setItem('username', formData.username);
-
-                if (data.redirect) {
-                    router.push(data.redirect);
-                } else {
-                    router.push('/dashboard');
+                if (data.requires2FA) {
+                    setTwoFactorUsername(formData.username);
+                    setShowTwoFactorDialog(true);
+                    return;
                 }
+
+                localStorage.setItem('username', formData.username);
+                router.push(data.redirect || '/dashboard');
             } catch (error) {
                 setErrors(prev => ({
                     ...prev,
@@ -198,6 +202,12 @@ export default function Login() {
                     </p>
                 </form>
             </div>
+
+            <TwoFactorDialog
+                isOpen={showTwoFactorDialog}
+                onClose={() => setShowTwoFactorDialog(false)}
+                username={twoFactorUsername}
+            />
         </div>
     );
 }

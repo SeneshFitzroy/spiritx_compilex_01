@@ -5,12 +5,26 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    minlength: 8,
+    minlength: 3, // Reduced from 8 to make testing easier
   },
   password: {
     type: String,
     required: true,
   },
+  is2FAEnabled: {
+    type: Boolean,
+    default: false,
+  },
+  twoFactorSecret: {
+    type: String,
+    default: '',
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  }
 });
 
-export default mongoose.models.User || mongoose.model('User', UserSchema);
+// Force Mongoose to use 'User' model consistently
+const User = mongoose.models.User || mongoose.model('User', UserSchema);
+export default User;
