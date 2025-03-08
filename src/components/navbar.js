@@ -25,7 +25,7 @@ export default function Navbar() {
                     <div className="flex justify-between h-16">
                         <div className="flex items-center">
                             <Link href="/">
-                                <span className="font-semibold">SecureConnect</span>
+                                <span className="text-xl font-semibold">SecureConnect</span>
                             </Link>
                         </div>
                         <div className="flex items-center space-x-2">

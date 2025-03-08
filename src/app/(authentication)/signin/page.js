@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import './login.css';
+import { Input } from '@/components/ui/input';
+import { Label } from '@radix-ui/react-label';
+import { Button } from '@/components/ui/button';
 
 export default function Login() {
     const router = useRouter();
@@ -146,7 +149,7 @@ export default function Login() {
     return (
         <div className="login-container">
             <div className="login-card">
-                <h1 className="login-title">Login</h1>
+                <h1 className="login-title tracking-tight font-semibold">Login 👋</h1>
 
                 <form onSubmit={handleSubmit}>
                     {errors.general && (
@@ -156,12 +159,13 @@ export default function Login() {
                     )}
 
                     <div className="form-group">
-                        <label htmlFor="username">Username</label>
-                        <input
+                        <Label className="text-sm" htmlFor="username">Username</Label>
+                        <Input
                             id="username"
                             name="username"
                             type="text"
-                            className={`w-full px-3 py-2 border ${errors.username ? 'border-red-500' : 'border-gray-300'} rounded focus:outline-none focus:border-gray-500 text-gray-800`}
+                            placeholder='John Doe'
+                            className={`w-full h-[40px] ${errors.username ? 'border-red-500' : ''} rounded-md`}
                             value={formData.username}
                             onChange={handleChange}
                             onBlur={() => setTouched({ ...touched, username: true })}
@@ -172,12 +176,13 @@ export default function Login() {
                     </div>
 
                     <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                        <input
+                    <Label className="text-sm" htmlFor="password">Password</Label>
+                        <Input
                             id="password"
                             name="password"
                             type="password"
-                            className={`w-full px-3 py-2 border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded focus:outline-none focus:border-gray-500 text-gray-800`}
+                            placeholder='Password'
+                            className={`w-full h-[40px] ${errors.password ? 'border-red-500' : ''} rounded-md`}
                             value={formData.password}
                             onChange={handleChange}
                             onBlur={() => setTouched({ ...touched, password: true })}
@@ -187,13 +192,13 @@ export default function Login() {
                         )}
                     </div>
 
-                    <button type="submit" disabled={isLoading} className="login-button">
+                    <Button className="w-full" type="submit" disabled={isLoading} variant={"default"}>
                         {isLoading ? 'Signing in...' : 'Login'}
-                    </button>
+                    </Button>
 
-                    <div className="signup-link">
+                    <div className="flex justify-center gap-1 text-sm pt-5 tracking-tight">
                         <span>Don't have an account?</span>
-                        <Link href="/signup">Sign up</Link>
+                        <Link className="text-black font-medium hover:underline" href="/signup">Sign up</Link>
                     </div>
                 </form>
             </div>
