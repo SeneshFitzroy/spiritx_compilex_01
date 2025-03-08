@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export default function Signup() {
     const [form, setForm] = useState({ username: '', password: '', confirmPassword: '' });
@@ -100,7 +101,7 @@ export default function Signup() {
 
                 <form onSubmit={handleSubmit} className="space-y-5">
                     <div>
-                        <label className="text-sm text-gray-600 block mb-1 ml-1">Username</label>
+                        <label className="text-sm text-black block mb-1 ml-1">Username</label>
                         <input
                             name="username"
                             value={form.username}
@@ -112,7 +113,7 @@ export default function Signup() {
                     </div>
 
                     <div>
-                        <label className="text-sm text-gray-600 block mb-1 ml-1">Password</label>
+                        <label className="text-sm text-black block mb-1 ml-1">Password</label>
                         <input
                             type="password"
                             name="password"
@@ -139,7 +140,7 @@ export default function Signup() {
                     </div>
 
                     <div>
-                        <label className="text-sm text-gray-600 block mb-1 ml-1">Confirm Password</label>
+                        <label className="text-sm text-black block mb-1 ml-1">Confirm Password</label>
                         <input
                             type="password"
                             name="confirmPassword"
@@ -160,7 +161,7 @@ export default function Signup() {
                     <div className="pt-2">
                         <button
                             type="submit"
-                            className="w-full py-2 bg-black text-white text-sm font-normal rounded-xl hover:bg-gray-800 transition-colors"
+                            className="w-full py-2 bg-black text-white text-sm tracking-tight font-semibold rounded-full hover:bg-gray-800 transition-colors"
                         >
                             Sign up
                         </button>
@@ -168,9 +169,9 @@ export default function Signup() {
 
                     <p className="text-center text-xs text-gray-500 mt-4">
                         Already have an account?
-                        <a href="/login" className="text-gray-700 font-semibold hover:text-black ml-1">
+                        <Link href="/login" className="text-gray-700 font-semibold ml-1 hover:underline">
                             Sign in
-                        </a>
+                        </Link>
                     </p>
                 </form>
             </div>
