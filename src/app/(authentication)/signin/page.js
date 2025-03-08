@@ -1,35 +1,29 @@
 "use client";
-
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation'; // Changed from 'next/router'
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function Login() {
     const router = useRouter();
 
-    // Form state
     const [formData, setFormData] = useState({
         username: '',
         password: ''
     });
 
-    // Error state
     const [errors, setErrors] = useState({
         username: '',
         password: '',
         general: ''
     });
 
-    // Touched fields tracker
     const [touched, setTouched] = useState({
         username: false,
         password: false
     });
 
-    // Loading state for form submission
     const [isLoading, setIsLoading] = useState(false);
 
-    // Handle input changes
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -37,14 +31,12 @@ export default function Login() {
             [name]: value
         });
 
-        // Mark field as touched
         setTouched({
             ...touched,
             [name]: true
         });
     };
 
-    // Validate form
     const validateForm = () => {
         let tempErrors = {
             username: '',
@@ -59,7 +51,6 @@ export default function Login() {
             isValid = false;
         }
 
-        // Password validation
         if (!formData.password) {
             tempErrors.password = 'Password is required';
             isValid = false;
@@ -69,7 +60,6 @@ export default function Login() {
         return isValid;
     };
 
-    // Real-time validation
     useEffect(() => {
         if (touched.username) {
             if (!formData.username) {
@@ -88,11 +78,9 @@ export default function Login() {
         }
     }, [formData, touched]);
 
-    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Mark all fields as touched
         setTouched({
             username: true,
             password: true
@@ -115,7 +103,6 @@ export default function Login() {
                 const data = await response.json();
 
                 if (!response.ok) {
-                    // Handle API errors
                     setErrors({
                         username: data.errors?.username || '',
                         password: data.errors?.password || '',
@@ -124,14 +111,14 @@ export default function Login() {
                     return;
                 }
 
-                // Successful login
+                localStorage.setItem('username', formData.username);
+
                 if (data.redirect) {
                     router.push(data.redirect);
                 } else {
                     router.push('/landing');
                 }
             } catch (error) {
-                console.error('Login error:', error);
                 setErrors(prev => ({
                     ...prev,
                     general: 'An error occurred during login. Please try again.'
@@ -148,14 +135,12 @@ export default function Login() {
                 <h1 className="text-2xl font-bold text-center mb-6 text-black">Login</h1>
 
                 <form onSubmit={handleSubmit}>
-                    {/* General error message */}
                     {errors.general && (
                         <div className="mb-4 p-2 bg-red-50 border border-red-200 text-red-600 text-sm rounded">
                             {errors.general}
                         </div>
                     )}
 
-                    {/* Username field */}
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
                             Username
@@ -174,7 +159,6 @@ export default function Login() {
                         )}
                     </div>
 
-                    {/* Password field */}
                     <div className="mb-6">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
                             Password
@@ -193,7 +177,6 @@ export default function Login() {
                         )}
                     </div>
 
-                    {/* Submit button */}
                     <div className="mb-4">
                         <button
                             type="submit"
@@ -204,7 +187,6 @@ export default function Login() {
                         </button>
                     </div>
 
-                    {/* Signup link */}
                     <div className="text-center text-sm">
                         <span className="text-gray-800">Don't have an account?</span>{' '}
                         <Link href="/signup" className="text-gray-700 hover:underline">
