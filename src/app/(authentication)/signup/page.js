@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 export default function Signup() {
     const [form, setForm] = useState({ username: '', password: '', confirmPassword: '' });
@@ -11,6 +13,7 @@ export default function Signup() {
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [missingRequirements, setMissingRequirements] = useState([]);
     const [checkingAuth, setCheckingAuth] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -91,6 +94,7 @@ export default function Signup() {
         if (missingRequirements.length > 0 || Object.keys(errors).length > 0) return;
 
         try {
+            setIsLoading(true);
             const res = await fetch('/api/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -108,6 +112,8 @@ export default function Signup() {
             }
         } catch (error) {
             setAuthError('Signup failed. Please try again.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -167,22 +173,22 @@ export default function Signup() {
     };
 
     if (checkingAuth) {
-        return <div className="min-h-screen flex items-center justify-center bg-white p-4">Loading...</div>;
+        return <div className="min-h-screen flex items-center justify-center bg-[#212529] p-4">Loading...</div>;
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-white p-4">
+        <div className="min-h-screen flex items-center justify-center bg-[#212529] p-4">
             <div className="w-full max-w-md bg-white rounded-xl border border-gray-100 shadow-xl p-8">
                 <h1 className="text-center text-xl font-semibold tracking-tight mb-6 text-black">Create an account</h1>
 
                 <form onSubmit={handleSubmit} className="space-y-5">
                     <div>
                         <label className="text-sm text-black block mb-1 ml-1">Username</label>
-                        <input
+                        <Input
                             name="username"
                             value={form.username}
                             onChange={handleChange}
-                            className="w-full px-3 py-2 bg-gray-50 border text-black text-sm border-gray-200 rounded-xl focus:outline-none focus:border-gray-400 transition-colors"
+                            className="w-full px-3 py-2 border text-black text-sm border-gray-200 rounded-xl focus:outline-none focus:border-gray-400 transition-colors"
                             placeholder="Enter username"
                         />
                         {errors.username && <p className="text-red-500 text-xs mt-1 ml-1">{errors.username}</p>}
@@ -190,12 +196,12 @@ export default function Signup() {
 
                     <div>
                         <label className="text-sm text-black block mb-1 ml-1">Password</label>
-                        <input
+                        <Input
                             type="password"
                             name="password"
                             value={form.password}
                             onChange={handleChange}
-                            className="w-full px-3 py-2 bg-gray-50 border text-black text-sm border-gray-200 rounded-xl focus:outline-none focus:border-gray-400 transition-colors"
+                            className="w-full px-3 py-2 border text-black text-sm border-gray-200 rounded-xl focus:outline-none focus:border-gray-400 transition-colors"
                             placeholder="Enter password"
                         />
                         {renderPasswordStrength()}
@@ -206,33 +212,28 @@ export default function Signup() {
 
                     <div>
                         <label className="text-sm text-black block mb-1 ml-1">Confirm Password</label>
-                        <input
+                        <Input
                             type="password"
                             name="confirmPassword"
                             value={form.confirmPassword}
                             onChange={handleChange}
-                            className="w-full px-3 py-2 bg-gray-50 border text-black text-sm border-gray-200 rounded-xl focus:outline-none focus:border-gray-400 transition-colors"
+                            className="w-full px-3 py-2 border text-black text-sm border-gray-200 rounded-xl focus:outline-none focus:border-gray-400 transition-colors"
                             placeholder="Confirm password"
                         />
                         {errors.confirmPassword && <p className="text-red-500 text-xs mt-1 ml-1">{errors.confirmPassword}</p>}
                     </div>
 
                     {authError && (
-                        <div className="py-2 px-3 bg-gray-50 border border-gray-200 rounded-xl">
+                        <div className="py-2 px-3 border border-gray-200 rounded-xl">
                             <p className="text-red-600 text-xs text-center">{authError}</p>
                         </div>
                     )}
 
-                    <div className="pt-2">
-                        <button
-                            type="submit"
-                            className="w-full py-2 bg-black text-white text-sm tracking-tight font-semibold rounded-full hover:bg-gray-800 transition-colors"
-                        >
-                            Sign up
-                        </button>
-                    </div>
+                    <Button className="w-full rounded-full py-5" type="submit" disabled={isLoading} variant={"default"}>
+                        {isLoading ? 'Creating an account...' : 'Sign Up'}
+                    </Button>
 
-                    <p className="text-center text-xs text-gray-500 mt-4">
+                    <p className="text-center text-sm text-gray-500 mt-4">
                         Already have an account?
                         <Link href="/signin" className="text-gray-700 font-semibold ml-1 hover:underline">
                             Sign in

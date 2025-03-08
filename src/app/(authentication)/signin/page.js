@@ -2,9 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import './login.css';
 import { Input } from '@/components/ui/input';
-import { Label } from '@radix-ui/react-label';
 import { Button } from '@/components/ui/button';
 
 export default function Login() {
@@ -143,61 +141,57 @@ export default function Login() {
     };
 
     if (checkingAuth) {
-        return <div className="loading-screen">Loading...</div>;
+        return <div className="min-h-screen flex items-center justify-center bg-[#212529] p-4">Loading...</div>;
     }
 
     return (
-        <div className="login-container">
-            <div className="w-full max-w-md bg-white rounded-xl shadow-xl p-8">
-                <h1 className="login-title tracking-tight font-semibold">Login 👋</h1>
+        <div className="min-h-screen flex items-center justify-center bg-[#212529] p-4">
+            <div className="w-full max-w-md bg-white rounded-xl border border-gray-100 shadow-xl p-8">
+                <h1 className="text-center text-xl font-semibold tracking-tight mb-6 text-black">Login 👋</h1>
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className="space-y-5">
                     {errors.general && (
-                        <div className="mb-4 p-2 bg-red-50 border border-red-200 text-red-600 text-sm rounded-md">
-                            {errors.general}
+                        <div className="py-2 px-3 border border-gray-200 rounded-xl">
+                            <p className="text-red-600 text-xs text-center">{errors.general}</p>
                         </div>
                     )}
 
-                    <div className="form-group">
-                        <Label className="text-sm" htmlFor="username">Username</Label>
+                    <div>
+                        <label className="text-sm text-black block mb-1 ml-1" htmlFor="username">Username</label>
                         <Input
                             id="username"
                             name="username"
                             type="text"
-                            placeholder='John Doe'
-                            className={`w-full h-[40px] ${errors.username ? 'border-red-500' : ''} rounded-xl`}
+                            placeholder="Enter username"
+                            className="w-full px-3 py-2 border text-black text-sm border-gray-200 rounded-xl focus:outline-none focus:border-gray-400 transition-colors"
                             value={formData.username}
                             onChange={handleChange}
                             onBlur={() => setTouched({ ...touched, username: true })}
                         />
-                        {errors.username && (
-                            <p className="text-red-600 text-xs mt-1">{errors.username}</p>
-                        )}
+                        {errors.username && <p className="text-red-500 text-xs mt-1 ml-1">{errors.username}</p>}
                     </div>
 
-                    <div className="form-group">
-                        <Label className="text-sm" htmlFor="password">Password</Label>
+                    <div>
+                        <label className="text-sm text-black block mb-1 ml-1" htmlFor="password">Password</label>
                         <Input
                             id="password"
                             name="password"
                             type="password"
-                            placeholder='Password'
-                            className={`w-full h-[40px] ${errors.password ? 'border-red-500' : ''} rounded-xl`}
+                            placeholder="Enter password"
+                            className="w-full px-3 py-2 border text-black text-sm border-gray-200 rounded-xl focus:outline-none focus:border-gray-400 transition-colors"
                             value={formData.password}
                             onChange={handleChange}
                             onBlur={() => setTouched({ ...touched, password: true })}
                         />
-                        {errors.password && (
-                            <p className="text-red-600 text-xs mt-1">{errors.password}</p>
-                        )}
+                        {errors.password && <p className="text-red-500 text-xs mt-1 ml-1">{errors.password}</p>}
                     </div>
 
-                    <Button className="w-full rounded-full" type="submit" disabled={isLoading} variant={"default"}>
+                    <Button className="w-full rounded-full py-5" type="submit" disabled={isLoading} variant={"default"}>
                         {isLoading ? 'Signing in...' : 'Login'}
                     </Button>
 
-                    <p className="text-center text-sm text-gray-500 mt-5">
-                        Already have an account?
+                    <p className="text-center text-sm text-gray-500 mt-4">
+                        Don&apos;t have an account?
                         <Link href="/signup" className="text-gray-700 font-semibold ml-1 hover:underline">
                             Sign up
                         </Link>
