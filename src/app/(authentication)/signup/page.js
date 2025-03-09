@@ -1,10 +1,11 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import { Loader } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Signup() {
     const [form, setForm] = useState({ username: '', password: '', confirmPassword: '' });
@@ -174,8 +175,8 @@ export default function Signup() {
 
     if (checkingAuth) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A]">
-                <div className="text-[#FFFFFF] text-xl font-medium">Loading...</div>
+            <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A] text-white">
+                <Loader className="animate-spin"></Loader>
             </div>
         );
     }

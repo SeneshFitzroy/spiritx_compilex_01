@@ -5,7 +5,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    minlength: 3, // Reduced from 8 to make testing easier
+    minlength: 8,
   },
   password: {
     type: String,
@@ -25,6 +25,5 @@ const UserSchema = new mongoose.Schema({
   }
 });
 
-// Force Mongoose to use 'User' model consistently
 const User = mongoose.models.User || mongoose.model('User', UserSchema);
 export default User;

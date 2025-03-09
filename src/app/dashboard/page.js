@@ -1,12 +1,12 @@
 'use client'
 import Head from 'next/head';
 import styles from '../dashboard/Home.module.css';
+import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { Loader } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
-import Link from 'next/link';
-
 
 export default function Home() {
   const [username, setUsername] = useState('Guest');
@@ -24,7 +24,9 @@ export default function Home() {
   }, [router]);
 
   if (loading) {
-    return <div className={styles.container}>Loading...</div>;
+    return <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A] text-white">
+      <Loader className="animate-spin"></Loader>
+    </div>;
   }
 
   const handleLogout = () => {

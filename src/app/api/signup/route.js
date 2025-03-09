@@ -21,7 +21,9 @@ export async function POST(request) {
         }
 
         await dbConnect();
-        const existingUser = await User.findOne({ username });
+        const existingUser = await User.findOne({
+            username: { $regex: new RegExp(`^${username}$`, 'i') }
+        });
         if (existingUser) {
             errors.username = 'Username already exists.';
         }
@@ -39,8 +41,8 @@ export async function POST(request) {
             return NextResponse.json({ errors }, { status: 400 });
         }
 
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
+        const encrypt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, encrypt);
         const newUser = new User({ username, password: hashedPassword });
         await newUser.save();
 

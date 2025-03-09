@@ -1,8 +1,8 @@
 "use client"
 import { useState, useEffect } from 'react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@/components/ui/input-otp'
+import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 
 export default function TwoFactorDialog({ isOpen, onClose, username }) {

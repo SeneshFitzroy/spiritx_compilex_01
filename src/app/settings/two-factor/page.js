@@ -4,15 +4,17 @@ import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
-import styles from '../../dashboard/Home.module.css';
-import Image from 'next/image';
+import { Loader } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import Link from 'next/link';
-import { Loader } from 'lucide-react';
+import Image from 'next/image';
+import styles from '../../dashboard/Home.module.css';
 
 export default function TwoFactorSetup() {
+
     const router = useRouter();
+
     const [isLoading, setIsLoading] = useState(true);
     const [is2FAEnabled, setIs2FAEnabled] = useState(false);
     const [setupMode, setSetupMode] = useState(false);
@@ -24,7 +26,7 @@ export default function TwoFactorSetup() {
     const [username, setUsername] = useState('');
 
     useEffect(() => {
-        const checkAuthAndGet2FAStatus = async () => {
+        const check2FAStatus = async () => {
             try {
                 const storedUsername = localStorage.getItem('username');
                 if (!storedUsername) {
@@ -56,7 +58,7 @@ export default function TwoFactorSetup() {
             }
         };
 
-        checkAuthAndGet2FAStatus();
+        check2FAStatus();
     }, [router]);
 
     const handleLogout = () => {
@@ -65,7 +67,7 @@ export default function TwoFactorSetup() {
         router.push('/signin');
     };
 
-    const initiateSetup = async () => {
+    const genQR = async () => {
         setError('');
         setSuccess('');
         setIsLoading(true);
@@ -97,7 +99,7 @@ export default function TwoFactorSetup() {
         }
     };
 
-    const completeSetup = async (e) => {
+    const complete2FA = async (e) => {
         e.preventDefault();
         setError('');
         setSuccess('');
@@ -140,11 +142,6 @@ export default function TwoFactorSetup() {
             setSetupMode(false);
             setSuccess('Two-factor authentication has been successfully enabled for your account.');
             setVerificationCode('');
-
-            setTimeout(() => {
-                window.location.reload();
-            }, 1000);
-
         } catch {
             setError('An error occurred during verification. Please try again.');
         } finally {
@@ -175,10 +172,6 @@ export default function TwoFactorSetup() {
 
             setIs2FAEnabled(false);
             setSuccess('Two-factor authentication has been successfully disabled for your account.');
-
-            setTimeout(() => {
-                window.location.href = window.location.href;
-            }, 1500);
         } catch {
             setError('Failed to disable 2FA. Please try again.');
         } finally {
@@ -263,7 +256,7 @@ export default function TwoFactorSetup() {
                                     checked={is2FAEnabled}
                                     onCheckedChange={(checked) => {
                                         if (checked) {
-                                            initiateSetup();
+                                            genQR();
                                         } else {
                                             disable2FA();
                                         }
@@ -307,7 +300,7 @@ export default function TwoFactorSetup() {
                             </div>
                         </div>
 
-                        <form onSubmit={completeSetup} className="space-y-4">
+                        <form onSubmit={complete2FA} className="space-y-4">
                             <div>
                                 <label htmlFor="verificationCode" className="block text-sm font-medium text-gray-700 mb-1">
                                     Verification Code

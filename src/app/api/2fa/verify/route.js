@@ -103,7 +103,7 @@ export async function POST(request) {
                 );
                 if (updatedDoc) {
                     return NextResponse.json({
-                        message: '2FA has been successfully enabled (alternative method)',
+                        message: '2FA has been successfully enabled',
                         is2FAEnabled: true
                     }, { status: 200 });
                 }

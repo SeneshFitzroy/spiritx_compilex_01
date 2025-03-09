@@ -1,11 +1,11 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import './login.css';
 import { Input } from '@/components/ui/input';
 import { Label } from '@radix-ui/react-label';
+import { Loader } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 import TwoFactorDialog from '@/components/TwoFactorDialog';
 
 export default function Login() {
@@ -148,17 +148,17 @@ export default function Login() {
 
     if (checkingAuth) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A]">
-                <div className="text-[#FFFFFF] text-2xl">Loading...</div>
+            <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A] text-white">
+                <Loader className="animate-spin"></Loader>
             </div>
         );
     }
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A] p-4">
-            <div className="login-card relative w-full max-w-md bg-[#FFFFFF] rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+            <div className="relative w-full max-w-md bg-[#FFFFFF] rounded-xl shadow-lg border border-gray-200 overflow-hidden">
                 <div className="relative p-8">
-                    <h1 className="login-title text-3xl font-semibold tracking-tight text-[#1A1A1A] mb-8 text-center">
+                    <h1 className="text-3xl font-semibold tracking-tight text-[#1A1A1A] mb-8 text-center">
                         Login 👋
                     </h1>
 

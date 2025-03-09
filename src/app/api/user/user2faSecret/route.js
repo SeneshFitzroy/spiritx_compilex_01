@@ -48,7 +48,7 @@ export async function POST(request) {
             cookieStore.set('temp2FASecret', tempSecretData, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                maxAge: 60 * 60, // 1 hour
+                maxAge: 60 * 60,
                 path: '/',
             });
 

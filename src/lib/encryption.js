@@ -15,7 +15,6 @@ export function encryptData(text) {
         encrypted = Buffer.concat([encrypted, cipher.final()]);
         return `${iv.toString('hex')}:${encrypted.toString('hex')}`;
     } catch (error) {
-        console.error('Encryption error:', error);
         throw error;
     }
 }
@@ -34,7 +33,6 @@ export function decryptData(text) {
         decrypted = Buffer.concat([decrypted, decipher.final()]);
         return decrypted.toString();
     } catch (error) {
-        console.error('Decryption error:', error);
         return null;
     }
 }
