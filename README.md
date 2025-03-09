@@ -9,51 +9,7 @@ Ensure you have the following installed on your system:
 - **Node.js** 🔗 [Download Node.js](https://nodejs.org/)
 - **npm** (comes with Node.js) or **Yarn** 🔗 [Download Yarn](https://yarnpkg.com/)
 
-## 💻 Tech Stack
-
-#### Frontend:
-- **Next.js**
-- **Shadcn UI**
-- **Motion**
-
-#### Backend:
-- **Node.js**
-- **MongoDB** + **Mongoose**
-
-## 🗄️ Database Configuration
-
-**SpiritX_CompileX_01** uses **MongoDB** with **Mongoose** for data handling.  
-By default, the relevant **MongoDB URI** is hardcoded. However, if you want to use your own MongoDB URI:
-
-1. Navigate to:  
-   ```plaintext
-   src/lib/dbConnect.js
-
-then modify the line 3 as follow.
-```bash
-const MONGODB_URI = process.env.MONGODB_URI;
-```
-
-then create an .env file and add
-
-```bash
-MONGODB_URI = your_mondodb_connection_string
-```
-
-## Features
-
-- **User Authentication:** Secure login and registration system.
-- **Data Storage:** Submitted data is stored in MongoDB.
-- **Encryption:** Uses a custom encryption key to secure sensitive information.
-- **Real-time Validation** Built-in input validation.
-
-## Technologies Used
-
-- [Next.js](https://nextjs.org/)
-- [MongoDB](https://www.mongodb.com/)
-- [TailwindCSS](https://www.tailwindcss.com)
-
-## Setup Instructions
+## Installation
 
 ### 1. Clone the Repository
 
@@ -81,7 +37,47 @@ yarn dev
 
 Your application should now be running at http://localhost:3000.
 
-### 4. Testing the Authentication System
+
+## 🗄️ Database Configuration
+
+**SpiritX_CompileX_01** uses **MongoDB** with **Mongoose** for data handling.  
+By default, the **MongoDB URI** is hardcoded. However, if you want to use your own MongoDB URI:
+
+1. Navigate to: Navigate to `src/lib/dbConnect.js`
+
+2. Then modify the line 3 as follow.
+```bash
+const MONGODB_URI = process.env.MONGODB_URI;
+```
+3. Create an .env file at the root of the project and add
+```bash
+MONGODB_URI = your_mondodb_connection_string
+```
+
+
+## 💻 Tech Stack
+
+#### Frontend:
+- **Next.js**
+- **Shadcn UI**
+- **Motion**
+
+#### Backend:
+- **Node.js**
+- **MongoDB** + **Mongoose**
+
+
+## 🚀 Features
+
+- **PasswordSstrenth Indicator:** 
+- **Data Handeling with Encryption:**
+- **Real-Time data Validation**
+- **2-Factor Authentication**
+- **Route Protection**
+- **Responsive User Interface anf Experience**
+
+
+## Testing the Authentication System
 
 #### Sign In
 In homepage, you will see a signin button which will route you to the signin page or you can go to http://localhost:3000/signin and use test credentials,
