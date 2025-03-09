@@ -183,7 +183,7 @@ export default function Signup() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A] p-4">
             <div className="w-full max-w-md bg-[#FFFFFF] rounded-xl border border-gray-200 shadow-xl p-8">
-                <h1 className="text-center text-2xl font-semibold tracking-tight mb-8 text-[#1A1A1A]">
+                <h1 className="text-center text-3xl font-semibold tracking-tight mb-8 text-[#1A1A1A]">
                     Create an account 🔑
                 </h1>
 

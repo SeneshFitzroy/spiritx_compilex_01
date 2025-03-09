@@ -9,7 +9,7 @@ export default function Home() {
       <div className="flex items-center pt-40">
         <div className="max-w-5xl mx-auto px-4 text-center">
           <p className="text-2xl lg:text-5xl tracking-tight text-[#DEE2E6] mb-6">
-            Your Modern Gateway to a <br/> <span className="text-green-600 font-semibold">Safe Login System</span>
+            Your Modern Gateway to a <br/> <span className="text-green-500 font-semibold">Safe Login System</span>
           </p>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
             SecureConnect provides a rock-solid authentication system with proper validation,

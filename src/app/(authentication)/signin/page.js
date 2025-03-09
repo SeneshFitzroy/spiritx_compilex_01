@@ -158,7 +158,7 @@ export default function Login() {
         <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A] p-4">
             <div className="login-card relative w-full max-w-md bg-[#FFFFFF] rounded-xl shadow-lg border border-gray-200 overflow-hidden">
                 <div className="relative p-8">
-                    <h1 className="login-title text-3xl font-semibold text-[#1A1A1A] mb-8 text-center">
+                    <h1 className="login-title text-3xl font-semibold tracking-tight text-[#1A1A1A] mb-8 text-center">
                         Login 👋
                     </h1>
 
