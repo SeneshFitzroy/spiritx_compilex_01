@@ -1,6 +1,6 @@
 # SpiritX_CompileX_01
 
-This repository contains an authentication system developed with <b>Next.js</b>, and <b>MongoDB Atlas.</b> The project leverages Next.js for the frontend/backend framework and MongoDB for data storage. This guide covers setup, configuration, and testing instructions to help you get started quickly.
+This repository contains an authentication system developed with. The project leverages **Next.js** for the frontend/backend framework and **MongoDB** for data storage. This guide covers setup, configuration, and testing instructions to help you get started quickly.
 
 You can try out the [hosted version](https://spiritx-compilex-01.vercel.app/) here.
 
