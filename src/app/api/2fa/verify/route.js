@@ -107,7 +107,7 @@ export async function POST(request) {
                         is2FAEnabled: true
                     }, { status: 200 });
                 }
-            } catch (altError) {
+            } catch {
             }
 
             return NextResponse.json({
@@ -130,7 +130,7 @@ async function getUserFromSession() {
         }
 
         return null;
-    } catch (error) {
+    } catch {
         return null;
     }
 }

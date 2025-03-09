@@ -32,7 +32,7 @@ export async function GET(request) {
             secretExists: !!user.twoFactorSecret
         }, { status: 200 });
 
-    } catch (error) {
+    } catch {
         return NextResponse.json({ error: 'Server error' }, { status: 500 });
     }
 }
@@ -48,7 +48,7 @@ async function getUserFromSession() {
         }
 
         return null;
-    } catch (error) {
+    } catch {
         return null;
     }
 }

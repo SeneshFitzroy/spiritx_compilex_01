@@ -56,10 +56,10 @@ export async function POST(request) {
                 success: true,
                 message: '2FA secret stored successfully'
             }, { status: 200 });
-        } catch (error) {
+        } catch {
             return NextResponse.json({ error: 'Failed to store 2FA secret' }, { status: 500 });
         }
-    } catch (error) {
+    } catch {
         return NextResponse.json({ error: 'Server error' }, { status: 500 });
     }
 }

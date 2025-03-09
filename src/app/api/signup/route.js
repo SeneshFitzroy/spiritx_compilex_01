@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '../../../lib/dbConnect';
 import User from '../../../model/User';
-const bcrypt = require('bcrypt');
+import bcrypt from 'bcrypt';
 
 export async function POST(request) {
     try {
@@ -48,7 +48,7 @@ export async function POST(request) {
             { message: 'Signup successful! Redirecting to signin...', redirect: '/signin', delay: 2000 },
             { status: 201 }
         );
-    } catch (err) {
+    } catch {
         return NextResponse.json({ error: 'Server error' }, { status: 500 });
     }
 }

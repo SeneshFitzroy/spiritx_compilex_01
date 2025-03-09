@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { decryptData } from '../../../../lib/encryption';
-
-
 import mongoose from 'mongoose';
 import dbConnect from '../../../../lib/dbConnect';
 import User from '../../../../model/User';
@@ -24,7 +22,7 @@ export async function POST(request) {
                 const headers = request.headers;
                 username = headers.get('x-username');
             }
-        } catch (error) {
+        } catch {
             username = await getUserFromSession();
 
             if (!username) {
@@ -70,12 +68,12 @@ export async function POST(request) {
                 is2FAEnabled: false
             }, { status: 200 });
 
-        } catch (error) {
+        } catch {
             return NextResponse.json({
                 error: 'Failed to disable 2FA'
             }, { status: 500 });
         }
-    } catch (error) {
+    } catch {
         return NextResponse.json({ error: 'Server error' }, { status: 500 });
     }
 }
@@ -91,7 +89,7 @@ async function getUserFromSession() {
         }
 
         return null;
-    } catch (error) {
+    } catch {
         return null;
     }
 }

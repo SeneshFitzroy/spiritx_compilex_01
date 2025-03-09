@@ -54,7 +54,7 @@ export async function POST(request) {
                             secret = secretData.secret;
                         }
                     }
-                } catch (e) {
+                } catch {
                 }
             }
         }
@@ -98,7 +98,7 @@ export async function POST(request) {
                     { _id: user._id },
                     { $set: { twoFactorSecret: secret, is2FAEnabled: true } }
                 );
-            } catch (e) {
+            } catch {
             }
         }
 
@@ -127,7 +127,7 @@ export async function POST(request) {
             }
         }, { status: 200 });
 
-    } catch (error) {
+    } catch {
         return NextResponse.json({ error: 'Server error' }, { status: 500 });
     }
 }

@@ -23,11 +23,11 @@ export async function POST(request) {
                     username = body.username;
                 }
             }
-        } catch (error) {
+        } catch {
             try {
                 const body = await request.json();
                 username = body.username;
-            } catch (innerError) {
+            } catch {
             }
         }
 
@@ -57,7 +57,7 @@ export async function POST(request) {
             qrCodeUrl
         }, { status: 200 });
 
-    } catch (error) {
+    } catch {
         return NextResponse.json({
             error: 'Server error'
         }, { status: 500 });
@@ -75,7 +75,7 @@ async function getUserFromSession() {
         }
 
         return null;
-    } catch (error) {
+    } catch {
         return null;
     }
 }

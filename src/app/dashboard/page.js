@@ -3,6 +3,10 @@ import Head from 'next/head';
 import styles from '../dashboard/Home.module.css';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
+import Link from 'next/link';
+
 
 export default function Home() {
   const [username, setUsername] = useState('Guest');
@@ -25,7 +29,7 @@ export default function Home() {
 
   const handleLogout = () => {
     localStorage.removeItem('username');
-    setUsername('Guest'); 
+    setUsername('Guest');
     router.push('/signin');
   };
 
@@ -41,10 +45,30 @@ export default function Home() {
         <div className={styles.logo}>
           <span className={styles.logoIcon}>S</span> SecureConnect
         </div>
-        <nav className={styles.nav}>
+        <nav className={`flex items-center ${styles.nav}`}>
           <a href="#features">Features</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Avatar className="ml-9">
+                <AvatarImage />
+                <AvatarFallback className="text-black text-xs">User</AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="mr-5">
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <Link href="/settings/two-factor">
+                <DropdownMenuItem>Security</DropdownMenuItem>
+              </Link>
+              <DropdownMenuItem>
+                <button onClick={handleLogout}>
+                  <span>Logout</span>
+                </button>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </nav>
       </header>
 
@@ -66,7 +90,7 @@ export default function Home() {
               <span>Logout</span>
             </button>
           )}
-          
+
         </section>
 
         <section id="features" className={styles.features}>

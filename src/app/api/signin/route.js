@@ -3,7 +3,7 @@ import dbConnect from '../../../lib/dbConnect';
 import User from '../../../model/User';
 import { cookies } from 'next/headers';
 import { encryptData } from '../../../lib/encryption';
-const bcrypt = require('bcrypt');
+import bcrypt from 'bcrypt';
 
 export async function POST(request) {
     try {
@@ -129,7 +129,7 @@ export async function POST(request) {
             }
         }, { status: 200 });
 
-    } catch (err) {
+    } catch {
         return NextResponse.json({
             errors: { general: 'Server error' }
         }, { status: 500 });
