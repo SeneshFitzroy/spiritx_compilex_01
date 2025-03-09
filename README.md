@@ -1,5 +1,4 @@
 # SpiritX_CompileX_01
-#### Authentication System
 
 This repository contains an authentication system developed with <b>Next.js</b>, and <b>MongoDB Atlas</b> The project leverages Next.js for the frontend/backend framework and MongoDB for data storage. This guide covers setup, configuration, and testing instructions to help you get started quickly.
 
@@ -77,6 +76,15 @@ Follow these steps to set up **MongoDB Atlas** and get your connection string:
 
 - **MongoDB Cloud Version**: It is assumed that you are using **MongoDB Atlas**, the fully managed cloud service provided by MongoDB.
 
+## 🚀 Features
+
+- **✅ PasswordSstrenth Indicator:** 
+- **✅ Data Handeling with Encryption:**
+- **✅ Real-Time data Validation**
+- **✅ 2-Factor Authentication**
+- **✅ Route Protection**
+- **✅ Responsive User Interface anf Experience**
+
 ## 💻 Tech Stack
 
 #### Frontend:
@@ -86,19 +94,7 @@ Follow these steps to set up **MongoDB Atlas** and get your connection string:
 
 #### Backend:
 - **Node.js**
-
-#### Database:
 - **MongoDB** with **Mongoose**
-
-## 🚀 Features
-
-- **PasswordSstrenth Indicator:** 
-- **Data Handeling with Encryption:**
-- **Real-Time data Validation**
-- **2-Factor Authentication**
-- **Route Protection**
-- **Responsive User Interface anf Experience**
-
 
 ## 🛠️ Testing the Authentication System
 
