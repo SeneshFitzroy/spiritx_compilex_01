@@ -1,24 +1,30 @@
 import Navbar from '@/components/navbar'
+import { BackgroundLines } from '@/components/ui/background'
+import { Lock } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#212529] tracking-tight">
+    <div className="min-h-screen bg-black tracking-tight">
 
       <Navbar/>
 
-      <div className="flex items-center pt-40">
-        <div className="max-w-5xl mx-auto px-4 text-center">
-          <p className="text-2xl lg:text-5xl tracking-tight text-[#DEE2E6] mb-6">
-            Your Modern Gateway to a <br/> <span className="text-green-500 font-semibold">Safe Login System</span>
+      <BackgroundLines className="min-h-screen flex items-center">
+        <div className="max-w-5xl mx-auto px-4 text-center" style={{zIndex: "1"}}>
+          <p className="leading-9 text-center text-2xl font-medium lg:text-5xl tracking-tight text-[#DEE2E6] mb-6">
+            Your Modern Gateway to a  <br/>  
+            <span className="flex items-center justify-center pb-1" style={{gap: "9px"}}> 
+              <Lock size={33}/> 
+              <span className="bg-clip-text text-transparent text-center bg-gradient-to-b from-pink-500 to-blue-500 text-2xl lg:text-5xl font-semibold tracking-tight leading-normal">Safe Login System</span>
+            </span>
           </p>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
             SecureConnect provides a rock-solid authentication system with proper validation,
             error handling, and user-friendly feedback.
           </p>
         </div>
-      </div>
+      </BackgroundLines>
 
-      <div className="bg-[#212529] pt-20">
+      <div>
         <div className="max-w-5xl mx-auto px-4">
           <h2 className="text-2xl font-semibold text-center text-white mb-12">Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -79,7 +85,7 @@ export default function Home() {
         </div>
       </div>
 
-      <footer className="py-5 border-t border-white/20">
+      <footer className="mt-[50px] py-5 border-t border-white/20">
         <div className="max-w-5xl mx-auto px-4 text-center">
           <p className="text-gray-300">©2025 SecureConnect. All rights reserved.</p>
         </div>
