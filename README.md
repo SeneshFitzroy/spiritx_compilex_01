@@ -95,6 +95,10 @@ Follow these steps to set up **MongoDB Atlas** and get your connection string:
 - **Node.js**
 - **MongoDB** with **Mongoose**
 
+#### Technologies:
+- **Shadcn UI**
+- **Motion**
+
 ## 🛠️ Testing the Authentication System
 
 #### Sign In
