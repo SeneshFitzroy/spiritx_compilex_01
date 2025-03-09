@@ -38,7 +38,7 @@ yarn dev
 
 Your application should now be running at http://localhost:3000.
 
-## Enviroment Variables
+## ⚙️ Enviroment Variables
 Create a .env file at root of the project and add following.
 ```bash
 MONGODB_URI=mongodb+srv://admin:PPtKyLIFz3ijxzmu@cluster.vgf7t.mongodb.net/Signup
@@ -58,7 +58,7 @@ Follow these steps to set up **MongoDB Atlas** and get your connection string:
    🔗 [Sign up for MongoDB Atlas](https://account.mongodb.com/account/login)  
 
 2. **Create a new cluster**  
-   - Navigate to the **Clusters** section and create a clsuter. 
+   - Navigate to the **Clusters** section and create a cluster. 
 
 3. **Get your connection string**  
    - Go to your **Cluster Dashboard** → Click **Connect**.  
@@ -66,7 +66,7 @@ Follow these steps to set up **MongoDB Atlas** and get your connection string:
    - Copy the **MongoDB URI** (starts with `mongodb+srv://`).  
 
 4. **Use your connection string**  
-   - update the **.env** file at the root:  
+   - Update the **.env** file at the root:  
      ```bash
      MONGODB_URI=your_mongodb_connection_string
      ```
@@ -77,10 +77,10 @@ Follow these steps to set up **MongoDB Atlas** and get your connection string:
 
 ## 🚀 Features
 
-- **✅ PasswordSstrenth Indicator:** 
-- **✅ Data Handeling with Encryption:**
+- **✅ Password Strenth Indicator:** 
 - **✅ Real-Time data Validation**
 - **✅ 2-Factor Authentication**
+- **✅ Data Handeling with Encryption:**
 - **✅ Route Protection**
 - **✅ Responsive User Interface anf Experience**
 
@@ -122,7 +122,7 @@ As an additional feature, we intergrated 2 factor authentication system. You can
 
 If you want to disable the 2 factor authentication, you can switch off the authenticator.
 
-If you enable it, after clicking signin, you will be pop up a dialog box for asking OTP from authenticator app.
+If you enable it, after clicking signin, you will be pop up a dialog box asking the OTP from the authenticator app.
 
 <!-- Although, we can't provide real-time authenticator code for this, if you want to try out 2 factor authentication system without setting up your own, use
 ```bash
