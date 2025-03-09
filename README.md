@@ -38,10 +38,17 @@ yarn dev
 
 Your application should now be running at http://localhost:3000.
 
+## Enviroment Variables
+Create a .env file at root of the project and add following.
+```bash
+MONGODB_URI=mongodb+srv://admin:PPtKyLIFz3ijxzmu@cluster.vgf7t.mongodb.net/Signup
+ENCRYPTION_KEY=9d6a48362ac31fd73e77be8ac4ee64d1
+```
+
 ## 🗄️ Database Configuration
 
 **SpiritX_CompileX_01** uses **MongoDB** with **Mongoose** for data handling.  
-By default, the **MongoDB URI** is hardcoded. However, if you want to use your own MongoDB URI:
+By default, the system uses **our MongoDB URI**, which is above MongoDB_URI at .env file. However, if you want to use your own MongoDB URI:
 
 #### ☁️ MongoDB Atlas Setup
 
@@ -59,15 +66,7 @@ Follow these steps to set up **MongoDB Atlas** and get your connection string:
    - Copy the **MongoDB URI** (starts with `mongodb+srv://`).  
 
 4. **Use your connection string**  
-   - Open your project and navigate to:  
-     ```plaintext
-     src/lib/dbConnect.js
-     ```
-   - Update the connection string:  
-     ```javascript
-     const MONGODB_URI = process.env.MONGODB_URI;
-     ```
-   - Create a **.env** file at the root and add:  
+   - update the **.env** file at the root:  
      ```bash
      MONGODB_URI=your_mongodb_connection_string
      ```
