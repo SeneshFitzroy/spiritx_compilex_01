@@ -77,8 +77,8 @@ Follow these steps to set up **MongoDB Atlas** and get your connection string:
 
 ## 🚀 Features
 
-- **✅ Password Strenth Indicator** 
-- **✅ Real-Time data Validation**
+- **✅ Password Strength Indicator** 
+- **✅ Real-Time Data Validation**
 - **✅ 2-Factor Authentication**
 - **✅ Data Handeling with Encryption**
 - **✅ Route Protection**
