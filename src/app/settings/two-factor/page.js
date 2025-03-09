@@ -4,7 +4,12 @@ import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
+import styles from '../../dashboard/Home.module.css';
 import Image from 'next/image';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import Link from 'next/link';
+import { Loader } from 'lucide-react';
 
 export default function TwoFactorSetup() {
     const router = useRouter();
@@ -45,7 +50,7 @@ export default function TwoFactorSetup() {
                 const data = await response.json();
                 setIs2FAEnabled(data.is2FAEnabled);
                 setIsLoading(false);
-            } catch (error) {
+            } catch {
                 setError('Error checking 2FA status. Please try refreshing.');
                 setIsLoading(false);
             }
@@ -53,6 +58,12 @@ export default function TwoFactorSetup() {
 
         checkAuthAndGet2FAStatus();
     }, [router]);
+
+    const handleLogout = () => {
+        localStorage.removeItem('username');
+        setUsername('Guest');
+        router.push('/signin');
+    };
 
     const initiateSetup = async () => {
         setError('');
@@ -79,7 +90,7 @@ export default function TwoFactorSetup() {
             setQrCodeUrl(data.qrCodeUrl);
             setSecret(data.secret);
             setSetupMode(true);
-        } catch (error) {
+        } catch {
             setError(`Failed to initialize 2FA setup`);
         } finally {
             setIsLoading(false);
@@ -134,7 +145,7 @@ export default function TwoFactorSetup() {
                 window.location.reload();
             }, 1000);
 
-        } catch (error) {
+        } catch {
             setError('An error occurred during verification. Please try again.');
         } finally {
             setIsLoading(false);
@@ -164,11 +175,11 @@ export default function TwoFactorSetup() {
 
             setIs2FAEnabled(false);
             setSuccess('Two-factor authentication has been successfully disabled for your account.');
-            
+
             setTimeout(() => {
                 window.location.href = window.location.href;
             }, 1500);
-        } catch (error) {
+        } catch {
             setError('Failed to disable 2FA. Please try again.');
         } finally {
             setIsLoading(false);
@@ -177,15 +188,49 @@ export default function TwoFactorSetup() {
 
     if (isLoading) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-[#f8f9fa] p-4">
-                <div className="text-center">Loading...</div>
+            <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A] text-white">
+                <Loader className="animate-spin"></Loader>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-[#f8f9fa] p-4">
-            <div className="max-w-3xl mx-auto bg-white rounded-xl border border-gray-100 shadow-xl p-8">
+        <div className="min-h-screen bg-[#1A1A1A]">
+
+            <header className={styles.header}>
+                <Link href="/dashboard">
+                    <div className={styles.logo}>
+                        <span className={styles.logoIcon}>S</span> SecureConnect
+                    </div>
+                </Link>
+                <nav className={`flex items-center ${styles.nav}`}>
+                    <a href="#features">Features</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger>
+                            <Avatar className="ml-9">
+                                <AvatarImage />
+                                <AvatarFallback className="text-black text-xs">User</AvatarFallback>
+                            </Avatar>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="mr-5">
+                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <Link href="/settings/two-factor">
+                                <DropdownMenuItem>Security</DropdownMenuItem>
+                            </Link>
+                            <DropdownMenuItem>
+                                <button onClick={handleLogout}>
+                                    <span>Logout</span>
+                                </button>
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                </nav>
+            </header>
+
+            <div className="max-w-3xl mx-auto bg-white rounded-xl border border-gray-100 shadow-xl p-8 mt-9">
                 <h1 className="text-xl tracking-tight mb-6" style={{ fontWeight: "600" }}>Two-Factor Authentication</h1>
 
                 {success && (
@@ -254,7 +299,7 @@ export default function TwoFactorSetup() {
 
                             <div className="w-full max-w-xs">
                                 <p className="text-xs text-gray-600 mb-2">
-                                    If you can't scan the QR code, enter this code manually in your app:
+                                    If you can&#39;t scan the QR code, enter this code manually in your app:
                                 </p>
                                 <div className="bg-white p-3 rounded border border-gray-200 text-center mb-4 font-mono text-sm break-all select-all">
                                     {secret}

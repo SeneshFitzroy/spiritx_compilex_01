@@ -135,7 +135,7 @@ export default function Login() {
 
                 localStorage.setItem('username', formData.username);
                 router.push(data.redirect || '/dashboard');
-            } catch (error) {
+            } catch {
                 setErrors(prev => ({
                     ...prev,
                     general: 'An error occurred during login. Please try again.'
@@ -158,7 +158,7 @@ export default function Login() {
         <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A] p-4">
             <div className="login-card relative w-full max-w-md bg-[#FFFFFF] rounded-xl shadow-lg border border-gray-200 overflow-hidden">
                 <div className="relative p-8">
-                    <h1 className="login-title text-3xl font-bold text-[#1A1A1A] mb-8 text-center">
+                    <h1 className="login-title text-3xl font-semibold text-[#1A1A1A] mb-8 text-center">
                         Login 👋
                     </h1>
 
@@ -227,7 +227,7 @@ export default function Login() {
                         </Button>
 
                         <div className="flex justify-center gap-1 text-sm text-gray-600 tracking-tight">
-                            <span>Don't have an account?</span>
+                            <span>Don&#39;t have an account?</span>
                             <Link
                                 className="text-[#1A1A1A] font-medium hover:text-[#333333] hover:underline transition-colors duration-200"
                                 href="/signup"

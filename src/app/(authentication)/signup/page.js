@@ -2,6 +2,9 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 
 export default function Signup() {
     const [form, setForm] = useState({ username: '', password: '', confirmPassword: '' });
@@ -11,6 +14,7 @@ export default function Signup() {
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [missingRequirements, setMissingRequirements] = useState([]);
     const [checkingAuth, setCheckingAuth] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -91,6 +95,7 @@ export default function Signup() {
         if (missingRequirements.length > 0 || Object.keys(errors).length > 0) return;
 
         try {
+            setIsLoading(true);
             const res = await fetch('/api/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -106,8 +111,10 @@ export default function Signup() {
                 setShowConfirmation(true);
                 setTimeout(() => router.push('/signin'), 2000);
             }
-        } catch (error) {
+        } catch {
             setAuthError('Signup failed. Please try again.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -176,31 +183,35 @@ export default function Signup() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A] p-4">
             <div className="w-full max-w-md bg-[#FFFFFF] rounded-xl border border-gray-200 shadow-xl p-8">
-                <h1 className="text-center text-xl font-semibold tracking-tight mb-6 text-[#1A1A1A]">
-                    Create account 🔑
+                <h1 className="text-center text-2xl font-semibold tracking-tight mb-8 text-[#1A1A1A]">
+                    Create an account 🔑
                 </h1>
 
                 <form onSubmit={handleSubmit} className="space-y-5">
-                    <div>
-                        <label className="text-sm text-[#1A1A1A] block mb-1 ml-1">Username</label>
-                        <input
+                    <div className="form-group space-y-2">
+                        <Label className="text-sm text-[#1A1A1A] font-medium" htmlFor="username">
+                            Username
+                        </Label>
+                        <Input
                             name="username"
                             value={form.username}
                             onChange={handleChange}
-                            className="w-full px-3 py-2 bg-gray-50 border text-[#1A1A1A] text-sm border-gray-300 rounded-xl focus:outline-none focus:border-[#1A1A1A] transition-colors"
+                            className="w-full h-12 bg-gray-50 border text-[#1A1A1A] text-sm border-gray-300 rounded-lg focus:outline-none focus:border-[#1A1A1A] transition-colors"
                             placeholder="Enter username"
                         />
                         {errors.username && <p className="text-[#E53E3E] text-xs mt-1 ml-1">{errors.username}</p>}
                     </div>
 
-                    <div>
-                        <label className="text-sm text-[#1A1A1A] block mb-1 ml-1">Password</label>
-                        <input
+                    <div className="form-group space-y-2">
+                        <Label className="text-sm text-[#1A1A1A] font-medium" htmlFor="password">
+                            Password
+                        </Label>
+                        <Input
                             type="password"
                             name="password"
                             value={form.password}
                             onChange={handleChange}
-                            className="w-full px-3 py-2 bg-gray-50 border text-[#1A1A1A] text-sm border-gray-300 rounded-xl focus:outline-none focus:border-[#1A1A1A] transition-colors"
+                            className="w-full h-12 bg-gray-50 border text-[#1A1A1A] text-sm border-gray-300 rounded-lg focus:outline-none focus:border-[#1A1A1A] transition-colors"
                             placeholder="Enter password"
                         />
                         {renderPasswordStrength()}
@@ -209,14 +220,14 @@ export default function Signup() {
                         )}
                     </div>
 
-                    <div>
-                        <label className="text-sm text-[#1A1A1A] block mb-1 ml-1">Confirm Password</label>
-                        <input
+                    <div className="form-group space-y-2">
+                        <Label className="text-sm text-[#1A1A1A] block mb-1 ml-1">Confirm Password</Label>
+                        <Input
                             type="password"
                             name="confirmPassword"
                             value={form.confirmPassword}
                             onChange={handleChange}
-                            className="w-full px-3 py-2 bg-gray-50 border text-[#1A1A1A] text-sm border-gray-300 rounded-xl focus:outline-none focus:border-[#1A1A1A] transition-colors"
+                            className="w-full h-12 bg-gray-50 border text-[#1A1A1A] text-sm border-gray-300 rounded-lg focus:outline-none focus:border-[#1A1A1A] transition-colors"
                             placeholder="Confirm password"
                         />
                         {errors.confirmPassword && (
@@ -231,15 +242,26 @@ export default function Signup() {
                     )}
 
                     <div className="pt-2">
-                        <button
+                        <Button
                             type="submit"
-                            className="w-full py-2 bg-[#1A1A1A] text-[#FFFFFF] text-sm tracking-tight font-semibold rounded-full hover:bg-[#333333] transition-colors"
+                            className="w-full h-12 bg-[#1A1A1A] text-[#FFFFFF] font-semibold rounded-lg hover:bg-[#333333] disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-300"
+                            disabled={isLoading}
                         >
-                            Sign up
-                        </button>
+                            {isLoading ? (
+                                <span className="flex items-center justify-center gap-2">
+                                    <svg className="animate-spin h-5 w-5 text-[#FFFFFF]" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+                                    </svg>
+                                    Creating an account...
+                                </span>
+                            ) : (
+                                'Sign Up'
+                            )}
+                        </Button>
                     </div>
 
-                    <p className="text-center text-xs text-gray-600 mt-4">
+                    <p className="text-center text-sm text-gray-600 mt-4">
                         Already have an account?
                         <Link href="/signin" className="text-[#1A1A1A] font-semibold ml-1 hover:text-[#333333] hover:underline transition-colors">
                             Sign in
