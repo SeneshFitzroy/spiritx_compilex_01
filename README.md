@@ -88,8 +88,6 @@ Follow these steps to set up **MongoDB Atlas** and get your connection string:
 
 #### Frontend:
 - **Next.js**
-- **Shadcn UI**
-- **Motion**
 
 #### Backend:
 - **Node.js**
