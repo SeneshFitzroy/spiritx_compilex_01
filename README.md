@@ -73,7 +73,7 @@ Follow these steps to set up **MongoDB Atlas** and get your connection string:
 
 ## 🔍 Assumptions
 
-- **MongoDB Cloud Version**: It is assumed that you are using **MongoDB Atlas**, the fully managed cloud service provided by MongoDB.
+- **MongoDB Cloud Version**: We assumed that you are using **MongoDB Atlas**, the fully managed cloud service provided by MongoDB.
 
 ## 🚀 Features
 
@@ -120,16 +120,9 @@ As an additional feature, we intergrated 2 factor authentication system. You can
 2. It will give you a QR to scan from your authenticator app or a setup key to setup the authenticator app.
 3. Then add the authenticator code shown in the app and click Verify and Enable.
 
+If you enable it, after clicking signin, first, the system validate the credentials. Then you will be pop up a dialog box asking the OTP from the authenticator app.
+
 If you want to disable the 2 factor authentication, you can switch off the authenticator.
-
-If you enable it, after clicking signin, you will be pop up a dialog box asking the OTP from the authenticator app.
-
-<!-- Although, we can't provide real-time authenticator code for this, if you want to try out 2 factor authentication system without setting up your own, use
-```bash
-Username: CompileXAuthenticator
-Passsword: CompileX2025@
-```
-For maximum experience, we suggest you to enable 2 factor authentication using above "CompileX" account. So you can try with real OTP. -->
 
 <!-- ### 5. Viewing User Info on MongoDB Database
 To inspect the user data:
