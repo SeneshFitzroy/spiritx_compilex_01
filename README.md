@@ -3,15 +3,15 @@
 
 This repository contains an authentication system developed with <b>Next.js</b>, and <b>MongoDB Atlas</b> The project leverages Next.js for the frontend/backend framework and MongoDB for data storage. This guide covers setup, configuration, and testing instructions to help you get started quickly.
 
-## 🛠️ Prerequisites
+## 📦 Prerequisites
 Ensure you have the following installed on your system:
 
 - **Node.js** 🔗 [Download Node.js](https://nodejs.org/)
 - **npm** (comes with Node.js) or **Yarn** 🔗 [Download Yarn](https://yarnpkg.com/)
 
-## Installation
+## ⚡️ Installation
 
-### 1. Clone the Repository
+#### 1. Clone the Repository
 
 Clone this repository to your local machine:
 
@@ -19,7 +19,7 @@ Clone this repository to your local machine:
 git clone https://github.com/SeneshFitzroy/spiritx_compilex_01.git
 ```
 
-### 2. Install Dependencies
+#### 2. Install Dependencies
 Install the necessary packages using npm or yarn:
 ```bash
 npm install
@@ -27,7 +27,7 @@ npm install
 yarn install
 ```
 
-### 3. Run the Development Server
+#### 3. Run the Development Server
 Start the Next.js development server:
 ```bash
 npm run dev
@@ -37,13 +37,12 @@ yarn dev
 
 Your application should now be running at http://localhost:3000.
 
-
 ## 🗄️ Database Configuration
 
 **SpiritX_CompileX_01** uses **MongoDB** with **Mongoose** for data handling.  
 By default, the **MongoDB URI** is hardcoded. However, if you want to use your own MongoDB URI:
 
-## ☁️ MongoDB Atlas Setup
+#### ☁️ MongoDB Atlas Setup
 
 Follow these steps to set up **MongoDB Atlas** and get your connection string:
 
@@ -76,7 +75,6 @@ Follow these steps to set up **MongoDB Atlas** and get your connection string:
 
 - **MongoDB Cloud Version**: It is assumed that you are using **MongoDB Atlas**, the fully managed cloud service provided by MongoDB.
 
-
 ## 💻 Tech Stack
 
 #### Frontend:
@@ -86,8 +84,9 @@ Follow these steps to set up **MongoDB Atlas** and get your connection string:
 
 #### Backend:
 - **Node.js**
-- **MongoDB** + **Mongoose**
 
+#### Database:
+- **MongoDB** with **Mongoose**
 
 ## 🚀 Features
 
@@ -99,7 +98,7 @@ Follow these steps to set up **MongoDB Atlas** and get your connection string:
 - **Responsive User Interface anf Experience**
 
 
-## Testing the Authentication System
+## 🛠️ Testing the Authentication System
 
 #### Sign In
 In homepage, you will see a signin button which will route you to the signin page or you can go to http://localhost:3000/signin and use test credentials,
