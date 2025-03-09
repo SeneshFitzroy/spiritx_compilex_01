@@ -5,9 +5,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Loader } from 'lucide-react';
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3"
 import Link from 'next/link';
 
 export default function Signup() {
+    const { executeRecaptcha } = useGoogleReCaptcha();
     const [form, setForm] = useState({ username: '', password: '', confirmPassword: '' });
     const [errors, setErrors] = useState({});
     const [authError, setAuthError] = useState('');
@@ -107,6 +109,11 @@ export default function Signup() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!executeRecaptcha) {
+            setAuthError('reCAPTCHA not loaded. Please refresh the page.');
+            return;
+        }
+
         if (!form.username || !form.password || !form.confirmPassword) {
             setErrors({
                 username: !form.username ? 'Username is required.' : errors.username,
@@ -120,11 +127,33 @@ export default function Signup() {
 
         try {
             setIsLoading(true);
+            
+            // Execute reCAPTCHA and get token
+            const token = await executeRecaptcha("signup");
+            
+            // Verify token with backend
+            const recaptchaResponse = await fetch('/api/verify-recaptcha', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ token }),
+            });
+            
+            const recaptchaData = await recaptchaResponse.json();
+            
+            // Check if reCAPTCHA verification was successful
+            if (!recaptchaData.success) {
+                setAuthError('reCAPTCHA verification failed. Please try again.');
+                setIsLoading(false);
+                return;
+            }
+            
+            // Proceed with signup if reCAPTCHA is verified
             const res = await fetch('/api/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(form),
+                body: JSON.stringify({ ...form, recaptchaToken: token }),
             });
+            
             const data = await res.json();
             if (!res.ok) {
                 setErrors(data.errors || {});
@@ -135,7 +164,8 @@ export default function Signup() {
                 setShowConfirmation(true);
                 setTimeout(() => router.push('/signin'), 2000);
             }
-        } catch {
+        } catch (error) {
+            console.error("Error during signup:", error);
             setAuthError('Signup failed. Please try again.');
         } finally {
             setIsLoading(false);

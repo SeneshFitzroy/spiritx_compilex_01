@@ -156,7 +156,7 @@ export default function Login() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A] p-4">
-            <div className="relative w-full max-w-md bg-[#FFFFFF] rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+            <div className="login-card relative w-full max-w-md bg-[#FFFFFF] rounded-xl shadow-lg border border-gray-200 overflow-hidden">
                 <div className="relative p-8">
                     <h1 className="text-3xl font-semibold tracking-tight text-[#1A1A1A] mb-8 text-center">
                         Login 👋
@@ -196,7 +196,6 @@ export default function Login() {
                                 id="password"
                                 name="password"
                                 type="password"
-                                placeholder="••••••••"
                                 className={`w-full h-12 bg-gray-50 border ${errors.password ? 'border-[#E53E3E]' : 'border-gray-300'} text-[#1A1A1A] placeholder:text-gray-600 rounded-lg focus:ring-1 focus:ring-[#1A1A1A] focus:border-[#1A1A1A] transition-all duration-200`}
                                 value={formData.password}
                                 onChange={handleChange}
