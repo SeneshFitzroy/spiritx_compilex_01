@@ -102,7 +102,7 @@ Follow these steps to set up **MongoDB Atlas** and get your connection string:
 
 ## 🛠️ Testing the Authentication System
 
-#### ⚒️ Sign In
+#### Sign In
 In homepage, you will see a signin button which will route you to the signin page or you can go to http://localhost:3000/signin and use test credentials,
 
 ```bash
@@ -112,10 +112,13 @@ Password: CompileX2025@
 
 after the signin, you'll will be redirected to the dashboard page. There you will see personalized Hello mesage with your username and a logout button.
 
-#### ⚒️ Sign Up
+#### Sign Up
 In homepage, you will see a signup button which will route you to the signup page or you can go to http://localhost:3000/signup and use any username and password and see all the validations there. Upon successfull signup, you will be redirect to sign in page, which is http://localhost:3000/signin
 
-#### ⚒️ 2 Factor Authentication (Additional)
+
+## 🎉 Additional Features
+
+#### 2 Factor Authentication
 As an additional feature, we intergrated 2 factor authentication system. You can go to http://localhost:3000/settings/two-factor and enable two factor authentication. 
 
 1. Switch on the 2 factor authentication.
