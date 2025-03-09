@@ -35,7 +35,7 @@ export async function POST(request) {
             }, { status: 401 });
         }
 
-        const cookieStore = await cookies();
+        const cookieStore = cookies();
 
         const has2FA = user.is2FAEnabled === true && !!user.twoFactorSecret;
 

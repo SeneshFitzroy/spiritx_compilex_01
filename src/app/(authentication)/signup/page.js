@@ -16,6 +16,7 @@ export default function Signup() {
     const [missingRequirements, setMissingRequirements] = useState([]);
     const [checkingAuth, setCheckingAuth] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
+    const [touched, setTouched] = useState({ username: false, password: false, confirmPassword: false });
     const router = useRouter();
 
     useEffect(() => {
@@ -43,11 +44,15 @@ export default function Signup() {
         let newErrors = {};
         let newMissingRequirements = [];
 
-        if (form.username && form.username.length < 8) {
+        if (touched.username && !form.username) {
+            newErrors.username = 'Username is required.';
+        } else if (form.username && form.username.length < 8) {
             newErrors.username = 'Username must be at least 8 characters long.';
         }
 
-        if (form.password) {
+        if (touched.password && !form.password) {
+            newErrors.password = 'Password is required.';
+        } else if (form.password) {
             if (!/[a-z]/.test(form.password)) {
                 newMissingRequirements.push('lowercase');
             }
@@ -69,16 +74,34 @@ export default function Signup() {
             setMissingRequirements([]);
         }
 
-        if (form.confirmPassword && form.confirmPassword !== form.password) {
+        if (touched.confirmPassword && !form.confirmPassword) {
+            newErrors.confirmPassword = 'Confirm password is required.';
+        } else if (form.confirmPassword && form.confirmPassword !== form.password) {
             newErrors.confirmPassword = 'Passwords do not match.';
         }
 
         setErrors(newErrors);
-    }, [form]);
+    }, [form, touched]);
 
     const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        setForm({ ...form, [name]: value });
+
+        setTouched({ ...touched, [name]: true });
+
+        if (value === '' && touched[name]) {
+            setErrors(prev => ({
+                ...prev,
+                [name]: `${name.charAt(0).toUpperCase() + name.slice(1)} is required.`
+            }));
+        }
+
         setAuthError('');
+    };
+
+    const handleBlur = (e) => {
+        const { name } = e.target;
+        setTouched({ ...touched, [name]: true });
     };
 
     const handleSubmit = async (e) => {
@@ -87,7 +110,7 @@ export default function Signup() {
         if (!form.username || !form.password || !form.confirmPassword) {
             setErrors({
                 username: !form.username ? 'Username is required.' : errors.username,
-                password: !form.password ? 'Password is required.' : errors.password,
+                password: !form.password ? 'Password is required.' : 'Password is required.',
                 confirmPassword: !form.confirmPassword ? 'Confirm password is required.' : errors.confirmPassword,
             });
             return;
@@ -197,6 +220,7 @@ export default function Signup() {
                             name="username"
                             value={form.username}
                             onChange={handleChange}
+                            onBlur={handleBlur}
                             className="w-full h-12 bg-gray-50 border text-[#1A1A1A] text-sm border-gray-300 rounded-lg focus:outline-none focus:border-[#1A1A1A] transition-colors"
                             placeholder="Enter username"
                         />
@@ -212,10 +236,14 @@ export default function Signup() {
                             name="password"
                             value={form.password}
                             onChange={handleChange}
+                            onBlur={handleBlur}
                             className="w-full h-12 bg-gray-50 border text-[#1A1A1A] text-sm border-gray-300 rounded-lg focus:outline-none focus:border-[#1A1A1A] transition-colors"
                             placeholder="Enter password"
                         />
                         {renderPasswordStrength()}
+                        {errors.password && typeof errors.password === 'string' && (
+                            <p className="text-[#E53E3E] text-xs mt-1 ml-1">{errors.password}</p>
+                        )}
                         {missingRequirements.length > 0 && (
                             <p className="text-[#E53E3E] text-xs mt-1 ml-1">{formatMissingRequirements()}</p>
                         )}
@@ -228,6 +256,7 @@ export default function Signup() {
                             name="confirmPassword"
                             value={form.confirmPassword}
                             onChange={handleChange}
+                            onBlur={handleBlur}
                             className="w-full h-12 bg-gray-50 border text-[#1A1A1A] text-sm border-gray-300 rounded-lg focus:outline-none focus:border-[#1A1A1A] transition-colors"
                             placeholder="Confirm password"
                         />
