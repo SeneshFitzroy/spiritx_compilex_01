@@ -82,7 +82,7 @@ Follow these steps to set up **MongoDB Atlas** and get your connection string:
 - **✅ 2-Factor Authentication**
 - **✅ Data Handeling with Encryption**
 - **✅ Route Protection**
-- **✅ Responsive User Interface anf Experience**
+- **✅ Responsive User Interface and Experience**
 
 ## 💻 Tech Stack
 
