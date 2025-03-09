@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 
-const RAW_KEY = process.env.ENCRYPTION_KEY
+const RAW_KEY = "9d6a48362ac31fd73e77be8ac4ee64d1"
 const ENCRYPTION_KEY = crypto.createHash('sha256').update(RAW_KEY).digest();
 
 export function encryptData(text) {

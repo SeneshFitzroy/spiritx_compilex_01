@@ -1,7 +1,44 @@
 # SpiritX_CompileX_01
 #### Authentication System
 
-This repository contains an authentication system. The project leverages Next.js for the frontend/backend framework and MongoDB for data storage. This guide covers setup, configuration, and testing instructions to help you get started quickly.
+This repository contains an authentication system devloped with <b>Next.js</b>, and <b>MongoDB Atlas</b> The project leverages Next.js for the frontend/backend framework and MongoDB for data storage. This guide covers setup, configuration, and testing instructions to help you get started quickly.
+
+## 🛠️ Prerequisites
+Ensure you have the following installed on your system:
+
+- **Node.js** 🔗 [Download Node.js](https://nodejs.org/)
+- **npm** (comes with Node.js) or **Yarn** 🔗 [Download Yarn](https://yarnpkg.com/)
+
+## 💻 Tech Stack
+
+#### Frontend:
+- **Next.js**
+- **Shadcn UI**
+- **Motion**
+
+#### Backend:
+- **Node.js**
+- **MongoDB** + **Mongoose**
+
+## 🗄️ Database Configuration
+
+**SpiritX_CompileX_01** uses **MongoDB** with **Mongoose** for data handling.  
+By default, the relevant **MongoDB URI** is hardcoded. However, if you want to use your own MongoDB URI:
+
+1. Navigate to:  
+   ```plaintext
+   src/lib/dbConnect.js
+
+then modify the line 3 as follow.
+```bash
+const MONGODB_URI = process.env.MONGODB_URI;
+```
+
+then create an .env file and add
+
+```bash
+MONGODB_URI = your_mondodb_connection_string
+```
 
 ## Features
 
@@ -26,14 +63,7 @@ Clone this repository to your local machine:
 git clone https://github.com/SeneshFitzroy/spiritx_compilex_01.git
 ```
 
-### 2. Create the Environment File
-In the root directory, create a file named .env and add the following environment variables:
-```bash
-MONGODB_URI=mongodb+srv://admin:PPtKyLIFz3ijxzmu@cluster.vgf7t.mongodb.net/Signup
-ENCRYPTION_KEY=9d6a48362ac31fd73e77be8ac4ee64d1
-```
-
-### 3. Install Dependencies
+### 2. Install Dependencies
 Install the necessary packages using npm or yarn:
 ```bash
 npm install
@@ -41,7 +71,7 @@ npm install
 yarn install
 ```
 
-### 4. Run the Development Server
+### 3. Run the Development Server
 Start the Next.js development server:
 ```bash
 npm run dev
@@ -51,7 +81,7 @@ yarn dev
 
 Your application should now be running at http://localhost:3000.
 
-### 5. Testing the Authentication System
+### 4. Testing the Authentication System
 
 #### Sign In
 In homepage, you will see a signin button which will route you to the signin page or you can go to http://localhost:3000/signin and use test credentials,
@@ -84,7 +114,7 @@ Passsword: CompileX2025@
 ```
 For maximum experience, we suggest you to enable 2 factor authentication using above "CompileX" account. So you can try with real OTP. -->
 
-### 6. Viewing User Info on MongoDB Database
+### 5. Viewing User Info on MongoDB Database
 To inspect the user data:
 
 <!-- 1. Visit MongoDB Sign In at https://account.mongodb.com/account/login
