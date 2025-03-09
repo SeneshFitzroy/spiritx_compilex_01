@@ -61,10 +61,10 @@ Username: CompileX
 Password: CompileX2025@
 ```
 
-after the signin, you'll will be redirected to the dashboard page page. There you will see personalized Hello mesage with your username and a logout button.
+after the signin, you'll will be redirected to the dashboard page. There you will see personalized Hello mesage with your username and a logout button.
 
 #### Sign Up
-In homepage, you will see a signup button which will route you to the signup page or you can go to http://localhost:3000/signup and use use any username and password and see all the validations there. Upon successfull signup, you will be redirect to sign in page, which is http://localhost:3000/signin
+In homepage, you will see a signup button which will route you to the signup page or you can go to http://localhost:3000/signup and use any username and password and see all the validations there. Upon successfull signup, you will be redirect to sign in page, which is http://localhost:3000/signin
 
 #### 2 Factor Authentication (Additional)
 As an additional feature, we integrated 2 factor authentication system, you can go to http://localhost:3000/settings/two-factor and enable two factor authentication. 
