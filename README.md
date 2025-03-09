@@ -1,7 +1,7 @@
 # SpiritX_CompileX_01
 #### Authentication System
 
-This repository contains an authentication system devloped with <b>Next.js</b>, and <b>MongoDB Atlas</b> The project leverages Next.js for the frontend/backend framework and MongoDB for data storage. This guide covers setup, configuration, and testing instructions to help you get started quickly.
+This repository contains an authentication system developed with <b>Next.js</b>, and <b>MongoDB Atlas</b> The project leverages Next.js for the frontend/backend framework and MongoDB for data storage. This guide covers setup, configuration, and testing instructions to help you get started quickly.
 
 ## 🛠️ Prerequisites
 Ensure you have the following installed on your system:
@@ -43,16 +43,38 @@ Your application should now be running at http://localhost:3000.
 **SpiritX_CompileX_01** uses **MongoDB** with **Mongoose** for data handling.  
 By default, the **MongoDB URI** is hardcoded. However, if you want to use your own MongoDB URI:
 
-1. Navigate to: Navigate to `src/lib/dbConnect.js`
+## ☁️ MongoDB Atlas Setup
 
-2. Then modify the line 3 as follow.
-```bash
-const MONGODB_URI = process.env.MONGODB_URI;
-```
-3. Create an .env file at the root of the project and add
-```bash
-MONGODB_URI = your_mondodb_connection_string
-```
+Follow these steps to set up **MongoDB Atlas** and get your connection string:
+
+1. **Create a MongoDB Atlas account**  
+   🔗 [Sign up for MongoDB Atlas](https://account.mongodb.com/account/login)  
+
+2. **Create a new cluster**  
+   - Navigate to the **Clusters** section and create a clsuter. 
+
+3. **Get your connection string**  
+   - Go to your **Cluster Dashboard** → Click **Connect**.  
+   - Select **"Connect your application"**.  
+   - Copy the **MongoDB URI** (starts with `mongodb+srv://`).  
+
+4. **Use your connection string**  
+   - Open your project and navigate to:  
+     ```plaintext
+     src/lib/dbConnect.js
+     ```
+   - Update the connection string:  
+     ```javascript
+     const MONGODB_URI = process.env.MONGODB_URI;
+     ```
+   - Create a **.env** file and add:  
+     ```bash
+     MONGODB_URI=your_mongodb_connection_string
+     ```
+
+## 🔍 Assumptions
+
+- **MongoDB Cloud Version**: It is assumed that you are using **MongoDB Atlas**, the fully managed cloud service provided by MongoDB.
 
 
 ## 💻 Tech Stack
